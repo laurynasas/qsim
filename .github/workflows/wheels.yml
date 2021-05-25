@@ -8,15 +8,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        python: [36, 37, 38, 39]
         include:
-          - os: ubuntu-latest
-            platform_id: manylinux_x86_64
-          - os: macos-latest
-            platform_id: macosx_x86_64
+          - os: ubuntu-20.04
+            name: manylinux2014
+            cibw:
+              arch: x86_64
+              build: "cp36* cp37* cp38* cp39*"
+              manylinux_image: manylinux2014
+
     env:
-      CIBW_BUILD: cp${{ matrix.python }}-${{ matrix.platform_id }}
+      CIBW_BUILD: "${{ matrix.cibw.build || '*' }}"
+      CIBW_MANYLINUX_X86_64_IMAGE: "${{ matrix.cibw.manylinux_image }}"
+      CIBW_ARCHS_LINUX: "${{ matrix.cibw.arch || 'auto' }}"
       CIBW_BEFORE_ALL_LINUX: yum remove -y cmake && yum install -y openssl-devel wget && wget https://cmake.org/files/v3.20/cmake-3.20.2.tar.gz && tar zxf cmake-3.* && cd cmake-3.* && ./bootstrap && make install
       CIBW_BEFORE_BUILD_MACOS: brew install libomp
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
@@ -28,10 +31,6 @@ jobs:
 
       - name: Install cibuildwheel
         run: python -m pip install cibuildwheel==1.11.0
-
-      - name: Install OpenMP
-        if: runner.os == 'Macos'
-        run: brew install libomp
 
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
