@@ -18,11 +18,6 @@ jobs:
           - os: macos-10.15
             name: mac
           - os: windows-2019
-            name: win32
-            architecture: x86
-            cibw:
-              build: "cp*win32"
-          - os: windows-2019
             name: win_amd64
             architecture: x64
             cibw:
