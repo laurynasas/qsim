@@ -37,6 +37,7 @@ jobs:
       CIBW_BEFORE_ALL_LINUX: ""
       CIBW_BEFORE_BUILD_MACOS: brew install libomp
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
+      CIBW_TEST_COMMAND_MACOS: "rm -rf qsimcirq && pytest qsimcirq_tests/qsimcirq_test.py"
     steps:
       - uses: actions/checkout@v2
 
