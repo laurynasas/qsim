@@ -761,7 +761,7 @@ class NoiseStep(cirq.Gate):
         return self._matrix
 
     def __str__(self):
-        return f"NoiseStep({self._matrix})"
+        return "NoiseChannel(%s)" % self._matrix
 
     def __repr__(self):
         return str(self)
@@ -867,7 +867,7 @@ class NoiseChannel(cirq.Gate):
         return [m for _, m in self._prob_op_pairs]
 
     def __str__(self):
-        return f"NoiseChannel({self._ops})"
+        return "NoiseChannel(%s)" % self._ops
 
     def __repr__(self):
         return str(self)
