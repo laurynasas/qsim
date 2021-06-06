@@ -22,8 +22,8 @@ bazel version
 #cd ${KOKORO_ARTIFACTS_DIR}/github/qsim
 
 # Create virtual env
-python3 -m virtualenv env
-source env/bin/activate
+#python3 -m virtualenv env
+#source env/bin/activate
 
 # Attempt to build all components in SSE and basic mode.
 # The Kokoro MacOS VMs are not configured for AVX2 or OpenMP, so these modes
