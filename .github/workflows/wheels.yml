@@ -37,7 +37,7 @@ jobs:
       CIBW_BEFORE_ALL_LINUX: ""
       CIBW_BEFORE_BUILD_MACOS: brew install libomp
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
-      CIBW_TEST_COMMAND_MACOS: "rm -rf qsimcirq && pytest qsimcirq_tests/qsimcirq_test.py"
+      CIBW_TEST_COMMAND_MACOS: "rm -rf /Users/runner/qsim/qsimcirq && pytest /Users/runner/qsim/qsimcirq_tests/qsimcirq_test.py"
     steps:
       - uses: actions/checkout@v2
 
@@ -47,8 +47,8 @@ jobs:
       - name: Install cibuildwheel and twine
         run: python -m pip install cibuildwheel==1.11.0 twine virtualenv
 
-      - name: Run C++ tests
-        run: bash build_tools/github/test_libs.sh
+#      - name: Run C++ tests
+#        run: bash build_tools/github/test_libs.sh
 
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
