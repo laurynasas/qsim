@@ -7,7 +7,6 @@ absl-py
 
 # Build and test requirements
 
-cirq
 sympy
 pybind11
 pytest
