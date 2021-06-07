@@ -37,7 +37,6 @@ jobs:
       CIBW_BEFORE_ALL_LINUX: ""
       CIBW_BEFORE_BUILD_MACOS: brew install libomp
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
-      CIBW_TEST_REQUIRES_MACOS: "pytest cirq sympy numpy"
       CIBW_BEFORE_TEST_MACOS: "rm -rf /Users/runner/work/qsim/qsim/qsimcirq"
       CIBW_TEST_COMMAND_MACOS: "which pip && which python && which pip3 && pip3 freeze && pip3 list && pip3 install cirq && pytest {package}/qsimcirq_tests/"
     steps:
