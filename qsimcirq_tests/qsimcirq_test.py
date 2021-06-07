@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys; print(sys.executable)
+import subprocess
 
 def get_base_prefix_compat():
     """Get base/real prefix, or sys.prefix if there is none."""
@@ -22,6 +23,7 @@ def in_virtualenv():
 
 print("in venv? %s" % in_virtualenv())
 print(help('modules'))
+subprocess.check_call([sys.executable, "-m", "pip", "install", "cirq"])
 
 import numpy as np
 import sympy
