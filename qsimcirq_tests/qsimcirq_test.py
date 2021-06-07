@@ -21,6 +21,7 @@ def in_virtualenv():
     return get_base_prefix_compat() != sys.prefix
 
 print("in venv? %s" % in_virtualenv())
+print(help('modules'))
 
 import numpy as np
 import sympy
