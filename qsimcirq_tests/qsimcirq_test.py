@@ -23,7 +23,10 @@ def in_virtualenv():
 
 print("in venv? %s The venv Path: %s" % (in_virtualenv(), sys.prefix))
 print(help('modules'))
-subprocess.check_call([sys.executable, "-m", "pip", "install", "cirq"])
+print(subprocess.check_call(["bash", "deactivate"]))
+print(subprocess.check_call(["bash", "source", "%s/bin/activate" % sys.prefix]))
+print(subprocess.check_call([sys.executable, "-m", "pip install", "cirq"]))
+
 
 import numpy as np
 import sympy
