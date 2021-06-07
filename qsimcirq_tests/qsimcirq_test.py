@@ -21,7 +21,7 @@ def get_base_prefix_compat():
 def in_virtualenv():
     return get_base_prefix_compat() != sys.prefix
 
-print("in venv? %s" % in_virtualenv())
+print("in venv? %s The venv Path: %s" % (in_virtualenv(), sys.prefix))
 print(help('modules'))
 subprocess.check_call([sys.executable, "-m", "pip", "install", "cirq"])
 
