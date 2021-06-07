@@ -39,7 +39,7 @@ jobs:
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
       CIBW_TEST_REQUIRES_MACOS: "pytest cirq sympy numpy"
 #      CIBW_BEFORE_TEST_MACOS: "rm -rf /Users/runner/work/qsim/qsim/qsimcirq"
-      CIBW_TEST_COMMAND_MACOS: "pytest {package}/qsimcirq_tests/"
+      CIBW_TEST_COMMAND_MACOS: "pip freeze && pytest {package}/qsimcirq_tests/"
     steps:
       - uses: actions/checkout@v2
 
