@@ -11,20 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import sys; print(sys.executable)
-import subprocess
-
-def get_base_prefix_compat():
-    """Get base/real prefix, or sys.prefix if there is none."""
-    return getattr(sys, "base_prefix", None) or getattr(sys, "real_prefix", None) or sys.prefix
-
-def in_virtualenv():
-    return get_base_prefix_compat() != sys.prefix
-
-print("in venv? %s The venv Path: %s" % (in_virtualenv(), sys.prefix))
 print(help('modules'))
-print(subprocess.check_call([sys.executable, "-m", "pip install", "cirq"]))
-
 
 import numpy as np
 import sympy
