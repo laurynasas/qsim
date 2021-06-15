@@ -508,7 +508,7 @@ class SimulatorHelper {
   using State = typename StateSpace::State;
 
   using Gate = Cirq::GateCirq<float>;
-  using Runner = QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
+  using Runner = typename QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
   using NoisyRunner = qsim::QuantumTrajectorySimulator<
       IO, Gate, MultiQubitGateFuser, Simulator>;
 
@@ -605,7 +605,7 @@ class SimulatorHelper {
     state_space.NormalToInternalOrder(state);
   }
 
-  typename Runner::Parameter get_params() const {
+  Runner::Parameter get_params() const {
     Runner::Parameter params;
     params.num_threads = num_threads;
     params.max_fused_size = max_fused_size;
@@ -614,7 +614,7 @@ class SimulatorHelper {
     return params;
   }
 
-  typename NoisyRunner::Parameter get_noisy_params() const {
+  NoisyRunner::Parameter get_noisy_params() const {
     NoisyRunner::Parameter params;
     params.max_fused_size = max_fused_size;
     params.verbosity = verbosity;
