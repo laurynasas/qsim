@@ -33,6 +33,20 @@
 #include "../lib/simmux.h"
 #include "../lib/util.h"
 
+#ifdef _WIN32
+//  Windows
+#include <intrin.h>
+#define cpuid(info, x)    __cpuidex(info, x, 0)
+
+#else
+//  GCC Intrinsics
+#include <cpuid.h>
+void cpuid(int info[4], int infoType){
+    __cpuid_count(infoType, 0, info[0], info[1], info[2], info[3]);
+}
+
+#endif
+
 using namespace qsim;
 
 namespace {
@@ -46,6 +60,32 @@ T parseOptions(const py::dict &options, const char *key) {
   }
   const auto &value = options[key];
   return value.cast<T>();
+}
+
+enum Instructions { AVX512F, AVX2, SSE4_1, BASIC };
+
+Instructions detectInstructions() {
+  Instructions instr = BASIC;
+  int info[4];
+
+  cpuid(info, 0);
+  int nIds = info[0];
+  if (nIds >= 1) {
+    cpuid(info, 1);
+    if (info[2] & ((int)1 << 19)) != 0 {
+      instr = SSE4_1;
+    }
+  }
+  if (nIds >= 7) {
+    cpuid(info, 7);
+    if (info[1] & ((int)1 <<  5)) != 0 {
+      instr = AVX2;
+    }
+    if (info[1] & ((int)1 << 16)) != 0 {
+      instr = AVX512F;
+    }
+  }
+  return instr;
 }
 
 Circuit<Cirq::GateCirq<float>> getCircuit(const py::dict &options) {
@@ -456,9 +496,10 @@ std::vector<std::complex<float>> qtrajectory_simulate(const py::dict &options) {
 }
 
 // Helper class for simulating circuits of all types.
+template <typename Simulator>
 class SimulatorHelper {
  public:
-  using Simulator = qsim::Simulator<For>;
+//  using Simulator = qsim::Simulator<For>;
   using StateSpace = Simulator::StateSpace;
   using State = StateSpace::State;
 
@@ -677,8 +718,22 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     uint64_t input_state) {
-  return SimulatorHelper::simulate_expectation_values(
-    options, opsums_and_qubit_counts, false, input_state);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_state);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_state);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_state);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_state);
+  }
 }
 
 std::vector<std::complex<double>> qsim_simulate_expectation_values(
@@ -687,8 +742,22 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     const py::array_t<float> &input_vector) {
-  return SimulatorHelper::simulate_expectation_values(
-    options, opsums_and_qubit_counts, false, input_vector);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_vector);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_vector);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_vector);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, false, input_vector);
+  }
 }
 
 std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
@@ -697,8 +766,21 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     uint64_t input_state) {
-  return SimulatorHelper::simulate_expectation_values(
-    options, opsums_and_qubit_counts, true, input_state);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_state);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_state);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_state);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_state);
 }
 
 std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
@@ -707,8 +789,22 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     const py::array_t<float> &input_vector) {
-  return SimulatorHelper::simulate_expectation_values(
-    options, opsums_and_qubit_counts, true, input_vector);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_vector);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_vector);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_vector);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_expectation_values(
+      options, opsums_and_qubit_counts, true, input_vector);
+    }
 }
 
 // Methods for sampling.
