@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(qsim)
 
-set(CMAKE_CXX_FLAGS "-march=sandybridge -mavx512f")
+set(CMAKE_CXX_FLAGS "-march=knl -mavx512f")
 
 include(FetchContent)
 
