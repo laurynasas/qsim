@@ -508,9 +508,9 @@ class SimulatorHelper {
   using State = typename StateSpace::State;
 
   using Gate = Cirq::GateCirq<float>;
-  using Runner = typename QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
-  using NoisyRunner = typename qsim::QuantumTrajectorySimulator<
-      IO, Gate, MultiQubitGateFuser, Simulator>;
+  using Runner = QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, typename Simulator>;
+  using NoisyRunner = qsim::QuantumTrajectorySimulator<
+      IO, Gate, MultiQubitGateFuser, typename Simulator>;
 
   SimulatorHelper() = delete;
 
@@ -829,6 +829,7 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, true, input_state);
+  }
 }
 
 std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
