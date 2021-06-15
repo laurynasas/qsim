@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(qsim)
 
-set(CMAKE_CXX_FLAGS "-fopenmp -march=haswell -march=skylake")
+set(CMAKE_CXX_FLAGS "-fopenmp -march=skylake")
 
 include(FetchContent)
 
