@@ -501,7 +501,7 @@ class SimulatorHelper {
  public:
 //  using Simulator = qsim::Simulator<For>;
   using StateSpace = typename Simulator::StateSpace;
-  using State = StateSpace::State;
+  using State = typename StateSpace::State;
 
   using Gate = Cirq::GateCirq<float>;
   using Runner = QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
@@ -692,22 +692,64 @@ class SimulatorHelper {
 
 py::array_t<float> qsim_simulate_fullstate(
     const py::dict &options, uint64_t input_state) {
-  return SimulatorHelper::simulate_fullstate(options, false, input_state);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_fullstate(options, false, input_state);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_fullstate(options, false, input_state);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_fullstate(options, false, input_state);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_fullstate(options, false, input_state);
 }
 
 py::array_t<float> qsim_simulate_fullstate(
     const py::dict &options, const py::array_t<float> &input_vector) {
-  return SimulatorHelper::simulate_fullstate(options, false, input_vector);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_fullstate(options, false, input_vector);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_fullstate(options, false, input_vector);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_fullstate(options, false, input_vector);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_fullstate(options, false, input_vector);
 }
 
 py::array_t<float> qtrajectory_simulate_fullstate(
     const py::dict &options, uint64_t input_state) {
-  return SimulatorHelper::simulate_fullstate(options, true, input_state);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_fullstate(options, true, input_state);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_fullstate(options, true, input_state);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_fullstate(options, true, input_state);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_fullstate(options, true, input_state);
+  }
 }
 
 py::array_t<float> qtrajectory_simulate_fullstate(
     const py::dict &options, const py::array_t<float> &input_vector) {
-  return SimulatorHelper::simulate_fullstate(options, true, input_vector);
+  auto instruction_set = detectInstructions();
+
+  switch (instruction_set) {
+  case AVX512F:
+    return SimulatorHelper<SimulatorAVX512<For>>::simulate_fullstate(options, true, input_vector);
+  case AVX2:
+    return SimulatorHelper<SimulatorAVX<For>>::simulate_fullstate(options, true, input_vector);
+  case SSE4_1:
+    return SimulatorHelper<SimulatorSSE<For>>::simulate_fullstate(options, true, input_vector);
+  default:
+    return SimulatorHelper<SimulatorBasic<For>>::simulate_fullstate(options, true, input_vector);
+  }
 }
 
 // Methods for calculating expectation values.
