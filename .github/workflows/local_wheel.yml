@@ -97,6 +97,7 @@ jobs:
           pip3 install -r requirements.txt
       - name: Build local wheels
         run: |
+          gcc -O2 -march=skylake -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
