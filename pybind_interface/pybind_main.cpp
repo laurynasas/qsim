@@ -512,7 +512,7 @@ class SimulatorHelper {
   using State = typename StateSpace::State;
 
   using Gate = Cirq::GateCirq<float>;
-  using Runner = typename QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
+  using Runner = QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
   using NoisyRunner = typename qsim::QuantumTrajectorySimulator<
       IO, Gate, MultiQubitGateFuser, Simulator>;
 
