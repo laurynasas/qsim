@@ -19,12 +19,10 @@ jobs:
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
           ls -lah dist/
-          delocate-wheel dist/laurynast_test_qsimcirq-0.9.0-cp39-cp39-macosx_10_15_x86_64.whl
-          ls -lah dist/
           brew uninstall libomp
       - name: Install QSim
         run: |
-          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp39-cp39-macosx_10_15_x86_64.whl
+          pip3 install dist/qsimcirq-0.9.5-cp39-cp39-macosx_10_15_x86_64.whl
       - name: Run tests
         run: |
           rm -rf qsimcirq/
@@ -44,7 +42,7 @@ jobs:
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
         run: |
-          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp38-cp38-linux_x86_64.whl
+          pip3 install dist/qsimcirq-0.9.5-cp38-cp38-linux_x86_64.whl
       - name: Run tests
         run: |
           rm -rf qsimcirq/
@@ -66,7 +64,7 @@ jobs:
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
         run: |
-          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp36-cp36m-linux_x86_64.whl
+          pip3 install dist/qsimcirq-0.9.5-cp36-cp36m-linux_x86_64.whl
       - name: Run tests
         run: |
           rm -rf qsimcirq/
@@ -85,7 +83,7 @@ jobs:
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
         run: |
-          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp37-cp37m-win_amd64.whl
+          pip3 install dist/qsimcirq-0.9.5-cp37-cp37m-win_amd64.whl
       - name: Run tests
         run: |
           rm -R qsimcirq/
@@ -104,7 +102,7 @@ jobs:
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
         run: |
-          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp37-cp37m-win_amd64.whl
+          pip3 install dist/qsimcirq-0.9.5-cp37-cp37m-win_amd64.whl
       - name: Run tests
         run: |
           rm -R qsimcirq/
