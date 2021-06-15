@@ -610,7 +610,7 @@ class SimulatorHelper {
   }
 
   auto get_params() const {
-    Runner::Parameter params;
+    typename Runner::Parameter params;
     params.num_threads = num_threads;
     params.max_fused_size = max_fused_size;
     params.verbosity = verbosity;
@@ -619,7 +619,7 @@ class SimulatorHelper {
   }
 
   auto get_noisy_params() const {
-    NoisyRunner::Parameter params;
+    typename NoisyRunner::Parameter params;
     params.max_fused_size = max_fused_size;
     params.verbosity = verbosity;
     return params;
