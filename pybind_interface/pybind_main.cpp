@@ -32,10 +32,14 @@
 #include "../lib/run_qsimh.h"
 #include "../lib/simmux.h"
 #include "../lib/util.h"
+
+#ifndef PYBIND_MAIN
+#define  PYBIND_MAIN
 #include "../lib/simulator_avx512.h"
 #include "../lib/simulator_avx.h"
 #include "../lib/simulator_sse.h"
 #include "../lib/simulator_basic.h"
+#endif
 
 #ifdef _WIN32
 //  Windows
@@ -508,9 +512,9 @@ class SimulatorHelper {
   using State = typename StateSpace::State;
 
   using Gate = Cirq::GateCirq<float>;
-  using Runner = QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, typename Simulator>;
-  using NoisyRunner = qsim::QuantumTrajectorySimulator<
-      IO, Gate, MultiQubitGateFuser, typename Simulator>;
+  using Runner = typename QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
+  using NoisyRunner = typename qsim::QuantumTrajectorySimulator<
+      IO, Gate, MultiQubitGateFuser, Simulator>;
 
   SimulatorHelper() = delete;
 
