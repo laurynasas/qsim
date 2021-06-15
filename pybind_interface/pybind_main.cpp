@@ -72,16 +72,16 @@ Instructions detectInstructions() {
   int nIds = info[0];
   if (nIds >= 1) {
     cpuid(info, 1);
-    if (info[2] & ((int)1 << 19)) != 0 {
+    if (info[2] & ((int)1 << 19) != 0) {
       instr = SSE4_1;
     }
   }
   if (nIds >= 7) {
     cpuid(info, 7);
-    if (info[1] & ((int)1 <<  5)) != 0 {
+    if (info[1] & ((int)1 <<  5) != 0) {
       instr = AVX2;
     }
-    if (info[1] & ((int)1 << 16)) != 0 {
+    if (info[1] & ((int)1 << 16) != 0) {
       instr = AVX512F;
     }
   }
@@ -500,7 +500,7 @@ template <typename Simulator>
 class SimulatorHelper {
  public:
 //  using Simulator = qsim::Simulator<For>;
-  using StateSpace = Simulator::StateSpace;
+  using StateSpace = typename Simulator::StateSpace;
   using State = StateSpace::State;
 
   using Gate = Cirq::GateCirq<float>;
