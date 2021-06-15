@@ -1,13 +1,5 @@
 name: Bazel
 
-on:
-  push:
-    # Run post-submit tests when pushing to master.
-    branches:
-      - master
-
-  pull_request:
-
 jobs:
   # Run tests with Bazel v0.26.
   test:
