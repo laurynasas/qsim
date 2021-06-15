@@ -32,6 +32,10 @@
 #include "../lib/run_qsimh.h"
 #include "../lib/simmux.h"
 #include "../lib/util.h"
+#include "../lib/simulator_avx512.h"
+#include "../lib/simulator_avx.h"
+#include "../lib/simulator_sse.h"
+#include "../lib/simulator_basic.h"
 
 #ifdef _WIN32
 //  Windows
@@ -601,7 +605,7 @@ class SimulatorHelper {
     state_space.NormalToInternalOrder(state);
   }
 
-  Runner::Parameter get_params() const {
+  typename Runner::Parameter get_params() const {
     Runner::Parameter params;
     params.num_threads = num_threads;
     params.max_fused_size = max_fused_size;
@@ -610,7 +614,7 @@ class SimulatorHelper {
     return params;
   }
 
-  NoisyRunner::Parameter get_noisy_params() const {
+  typename NoisyRunner::Parameter get_noisy_params() const {
     NoisyRunner::Parameter params;
     params.max_fused_size = max_fused_size;
     params.verbosity = verbosity;
