@@ -1,0 +1,108 @@
+name: local wheel test
+
+on:
+  push:
+
+jobs:
+  run_test_macos_10_15:
+    name: Check that MacOS 10.15 package can be installed from local pip
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install reqs
+        run: |
+          pip3 install -r requirements.txt
+          brew install libomp
+      - name: Build local wheel
+        run: |
+          pip3 install wheel
+          python3 setup.py sdist bdist_wheel
+          ls -lah dist/
+          delocate-wheel dist/laurynast_test_qsimcirq-0.9.0-cp39-cp39-macosx_10_15_x86_64.whl
+          ls -lah dist/
+          brew uninstall libomp
+      - name: Install QSim
+        run: |
+          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp39-cp39-macosx_10_15_x86_64.whl
+      - name: Run tests
+        run: |
+          rm -rf qsimcirq/
+          pytest qsimcirq_tests/qsimcirq_test.py
+  run_test_ubuntu_20_04:
+    name: Check that Ubuntu 20.04 package can be installed from local pip
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install reqs
+        run: |
+          pip3 install -r requirements.txt
+      - name: Build local wheel
+        run: |
+          pip3 install wheel
+          python3 setup.py sdist bdist_wheel
+      - name: Install QSim
+        run: |
+          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp38-cp38-linux_x86_64.whl
+      - name: Run tests
+        run: |
+          rm -rf qsimcirq/
+          pytest qsimcirq_tests/qsimcirq_test.py
+  run_test_ubuntu_18_04:
+    name: Check that Ubuntu 18.04 package can be installed from local pip
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install reqs
+        run: |
+          sudo apt-get install -y python3-setuptools
+          pip3 install --upgrade pip
+          pip3 install -r requirements.txt
+      - name: Build local wheel
+        run: |
+          pip3 install wheel
+          python3 setup.py sdist bdist_wheel
+      - name: Install QSim
+        run: |
+          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp36-cp36m-linux_x86_64.whl
+      - name: Run tests
+        run: |
+          rm -rf qsimcirq/
+          pytest qsimcirq_tests/qsimcirq_test.py
+  run_test_win:
+    name: Check that Windows Server 2019 package can be installed from local pip
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install reqs
+        run: |
+          pip3 install -r requirements.txt
+      - name: Build local wheel
+        run: |
+          pip3 install wheel
+          python3 setup.py sdist bdist_wheel
+      - name: Install QSim
+        run: |
+          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp37-cp37m-win_amd64.whl
+      - name: Run tests
+        run: |
+          rm -R qsimcirq/
+          pytest qsimcirq_tests/qsimcirq_test.py
+  run_test_win_2016:
+    name: Check that Windows Server 2016 package can be installed from local pip
+    runs-on: windows-2016
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install reqs
+        run: |
+          pip3 install -r requirements.txt
+      - name: Build local wheels
+        run: |
+          pip3 install wheel
+          python3 setup.py sdist bdist_wheel
+      - name: Install QSim
+        run: |
+          pip3 install dist/laurynast_test_qsimcirq-0.9.0-cp37-cp37m-win_amd64.whl
+      - name: Run tests
+        run: |
+          rm -R qsimcirq/
+          pytest qsimcirq_tests/qsimcirq_test.py
