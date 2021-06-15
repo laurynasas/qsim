@@ -509,7 +509,7 @@ class SimulatorHelper {
 
   using Gate = Cirq::GateCirq<float>;
   using Runner = typename QSimRunner<IO, MultiQubitGateFuser<IO, Gate>, Simulator>;
-  using NoisyRunner = qsim::QuantumTrajectorySimulator<
+  using NoisyRunner = typename qsim::QuantumTrajectorySimulator<
       IO, Gate, MultiQubitGateFuser, Simulator>;
 
   SimulatorHelper() = delete;
