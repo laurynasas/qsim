@@ -707,6 +707,7 @@ py::array_t<float> qsim_simulate_fullstate(
     return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_fullstate(options, false, input_state);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_state);
+  }
 }
 
 py::array_t<float> qsim_simulate_fullstate(
@@ -722,6 +723,7 @@ py::array_t<float> qsim_simulate_fullstate(
     return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_fullstate(options, false, input_vector);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_vector);
+  }
 }
 
 py::array_t<float> qtrajectory_simulate_fullstate(
