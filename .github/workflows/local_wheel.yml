@@ -79,6 +79,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
+          Get-CimInstance -ComputerName localhost -Class CIM_Processor -ErrorAction Stop | Select-Object *
           pip3 install -r requirements.txt
       - name: Build local wheel
         run: |
@@ -98,6 +99,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
+          Get-CimInstance -ComputerName localhost -Class CIM_Processor -ErrorAction Stop | Select-Object *
           pip3 install -r requirements.txt
       - name: Build local wheels
         run: |
