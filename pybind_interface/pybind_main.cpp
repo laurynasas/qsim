@@ -21,6 +21,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
+
 
 #include "../lib/bitstring.h"
 #include "../lib/expect.h"
@@ -57,6 +59,7 @@ void cpuid(int info[4], int infoType){
 #endif
 
 using namespace qsim;
+using namespace std;
 
 namespace {
 
@@ -94,11 +97,11 @@ Instructions detectInstructions() {
       instr = AVX512F;
     }
   }
-  py::scoped_ostream_redirect stream(
-        std::cout,                               // std::ostream&
-        py::module_::import("sys").attr("stdout") // Python output
-  );
-  std::cout << "## INSTRUCTIONS: " << instr << std::endl;
+  ofstream myfile;
+  myfile.open ("example.txt");
+  myfile << "## INSTRUCTIONS: " << instr << "\n";
+  myfile.close();
+
   return instr;
 }
 
