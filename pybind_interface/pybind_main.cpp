@@ -94,7 +94,11 @@ Instructions detectInstructions() {
       instr = AVX512F;
     }
   }
-  std::cout << "-> INSTRUCTIONS: " << instr << std::endl;
+  py::scoped_ostream_redirect stream(
+        std::cout,                               // std::ostream&
+        py::module_::import("sys").attr("stdout") // Python output
+  );
+  std::cout << "## INSTRUCTIONS: " << instr << std::endl;
   return instr;
 }
 
