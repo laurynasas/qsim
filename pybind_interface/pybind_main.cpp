@@ -618,7 +618,7 @@ class SimulatorHelper {
     state_space.NormalToInternalOrder(state);
   }
 
-  typename Runner::Parameter get_params() const {
+  auto get_params() const {
     typename Runner::Parameter params;
     params.num_threads = num_threads;
     params.max_fused_size = max_fused_size;
@@ -627,7 +627,7 @@ class SimulatorHelper {
     return params;
   }
 
-  typename Runner::Parameter get_noisy_params() const {
+  auto get_noisy_params() const {
     typename NoisyRunner::Parameter params;
     params.max_fused_size = max_fused_size;
     params.verbosity = verbosity;
