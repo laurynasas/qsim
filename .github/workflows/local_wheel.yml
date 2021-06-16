@@ -80,7 +80,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
-          Get-CimInstance -ClassName Win32_Service
+          Get-CimInstance CIM_Processor
           pip3 install -r requirements.txt
       - name: Build local wheel
         run: |
