@@ -16,6 +16,7 @@ jobs:
       - name: Build local wheel
         run: |
           gcc -O2 -march=skylake -dM -E - < /dev/null | egrep "SSE|AVX" | sort
+          sysctl -a | grep machdep
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
           ls -lah dist/
