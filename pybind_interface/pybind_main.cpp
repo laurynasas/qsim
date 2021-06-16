@@ -20,6 +20,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "../lib/bitstring.h"
 #include "../lib/expect.h"
@@ -93,6 +94,7 @@ Instructions detectInstructions() {
       instr = AVX512F;
     }
   }
+  std::cout << "-> INSTRUCTIONS: " << instr << std::endl;
   return instr;
 }
 
