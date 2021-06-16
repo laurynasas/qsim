@@ -98,7 +98,7 @@ Instructions detectInstructions() {
     }
   }
   ofstream myfile;
-  myfile.open ("example.txt");
+  myfile.open ("o.txt");
   myfile << "## INSTRUCTIONS: " << instr << "\n";
   myfile.close();
 
