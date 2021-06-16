@@ -97,10 +97,10 @@ Instructions detectInstructions() {
       instr = AVX512F;
     }
   }
-  ofstream myfile;
-  myfile.open ("o.txt");
-  myfile << "## INSTRUCTIONS: " << instr << "\n";
-  myfile.close();
+//  ofstream myfile;
+//  myfile.open("o.txt");
+//  myfile << "## INSTRUCTIONS: " << instr << "\n";
+//  myfile.close();
 
   return instr;
 }
