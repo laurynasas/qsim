@@ -42,6 +42,7 @@ jobs:
         run: |
           gcc -O2 -march=skylake -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
+          sudo apt-get install -y gdb
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
@@ -50,7 +51,7 @@ jobs:
       - name: Run tests
         run: |
           rm -rf qsimcirq/
-          pytest --pdb qsimcirq_tests/qsimcirq_test.py
+          gdb -ex r --args pytest qsimcirq_tests/qsimcirq_test.py
 #          ls -lah . && cat o.txt
   run_test_ubuntu_18_04:
     name: Check that Ubuntu 18.04 package can be installed from local pip
@@ -61,7 +62,7 @@ jobs:
         run: |
           gcc -O2 -march=skylake -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
-          sudo apt-get install -y python3-setuptools
+          sudo apt-get install -y python3-setuptools gdb
           pip3 install --upgrade pip
           pip3 install -r requirements.txt
       - name: Build local wheel
@@ -74,7 +75,7 @@ jobs:
       - name: Run tests
         run: |
           rm -rf qsimcirq/
-          pytest --pdb qsimcirq_tests/qsimcirq_test.py
+          gdb -ex r --args pytest qsimcirq_tests/qsimcirq_test.py
 #          ls -lah . && cat o.txt
   run_test_win:
     name: Check that Windows Server 2019 package can be installed from local pip
