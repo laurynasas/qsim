@@ -24,6 +24,7 @@ jobs:
       - name: Install QSim
         run: |
           pip3 install dist/qsimcirq-0.9.5-cp39-cp39-macosx_10_15_x86_64.whl
+          brew install libomp
       - name: Run tests
         run: |
           rm -rf qsimcirq/
