@@ -92,6 +92,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
+          g++ test.cpp -o test && ./test
           Get-CimInstance CIM_Processor
           pip3 install -r requirements.txt
       - name: Build local wheel
@@ -114,6 +115,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
+          g++ test.cpp -o test && ./test
           Get-WmiObject Win32_Processor
           pip3 install -r requirements.txt
       - name: Build local wheels
