@@ -40,7 +40,6 @@
 #include "../lib/simulator_avx.h"
 #include "../lib/simulator_sse.h"
 #include "../lib/simulator_basic.h"
-#endif
 
 #ifdef _WIN32
 //  Windows
@@ -57,7 +56,6 @@ void cpuid(int info[4], int infoType){
 #endif
 
 using namespace qsim;
-using namespace std;
 
 namespace {
 
