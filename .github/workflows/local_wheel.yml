@@ -103,7 +103,7 @@ jobs:
           rm -R qsimcirq/
           pytest --pdb qsimcirq_tests/qsimcirq_test.py
           dir
-          where /r c:\windows example.txt
+          type example.txt
   run_test_win_2016:
     name: Check that Windows Server 2016 package can be installed from local pip
     runs-on: windows-2016
@@ -125,4 +125,4 @@ jobs:
           rm -R qsimcirq/
           pytest --pdb qsimcirq_tests/qsimcirq_test.py
           dir
-          where /r c:\windows example.txt
+          type example.txt
