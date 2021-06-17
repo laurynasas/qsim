@@ -53,6 +53,7 @@ jobs:
           rm -rf qsimcirq/
           gdb -ex=run -ex=backtrace --return-child-result --args python -m pytest qsimcirq_tests/qsimcirq_test.py
           find . -name 'example.txt'
+          cat ./example.txt
 #          ls -lah . && cat o.txt
   run_test_ubuntu_18_04:
     name: Check that Ubuntu 18.04 package can be installed from local pip
@@ -78,6 +79,7 @@ jobs:
           rm -rf qsimcirq/
           pytest qsimcirq_tests/qsimcirq_test.py
           find . -name 'example.txt'
+          cat ./example.txt
 #          ls -lah . && cat o.txt
   run_test_win:
     name: Check that Windows Server 2019 package can be installed from local pip
