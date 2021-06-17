@@ -97,10 +97,10 @@ Instructions detectInstructions() {
       instr = AVX512F;
     }
   }
-//  ofstream myfile;
-//  myfile.open("o.txt");
-//  myfile << "## INSTRUCTIONS: " << instr << "\n";
-//  myfile.close();
+  ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## INSTRUCTIONS: " << instr << "\n";
+  myfile.close();
 
   return instr;
 }
@@ -709,6 +709,10 @@ class SimulatorHelper {
 
 py::array_t<float> qsim_simulate_fullstate(
     const py::dict &options, uint64_t input_state) {
+  ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## qsim_simulate_fullstate\n";
+  myfile.close();
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
@@ -725,6 +729,10 @@ py::array_t<float> qsim_simulate_fullstate(
 
 py::array_t<float> qsim_simulate_fullstate(
     const py::dict &options, const py::array_t<float> &input_vector) {
+  ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## qsim_simulate_fullstate vector\n";
+  myfile.close();
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
@@ -741,6 +749,10 @@ py::array_t<float> qsim_simulate_fullstate(
 
 py::array_t<float> qtrajectory_simulate_fullstate(
     const py::dict &options, uint64_t input_state) {
+  ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## qtrajectory_simulate_fullstate\n";
+  myfile.close();
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
@@ -757,6 +769,10 @@ py::array_t<float> qtrajectory_simulate_fullstate(
 
 py::array_t<float> qtrajectory_simulate_fullstate(
     const py::dict &options, const py::array_t<float> &input_vector) {
+  ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## qtrajectory_simulate_fullstate vector\n";
+  myfile.close();
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
@@ -779,6 +795,10 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     uint64_t input_state) {
+  ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## qsim_simulate_expectation_values\n";
+  myfile.close();
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
@@ -803,6 +823,11 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     const py::array_t<float> &input_vector) {
+  ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## qsim_simulate_expectation_values vector\n";
+  myfile.close();
+
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
@@ -827,6 +852,10 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     uint64_t input_state) {
+    ofstream myfile;
+  myfile.open("example.txt");
+  myfile << "## qtrajectory_simulate_expectation_values\n";
+  myfile.close();
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
@@ -851,6 +880,9 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     const py::array_t<float> &input_vector) {
+  myfile.open("example.txt");
+  myfile << "## qtrajectory_simulate_expectation_values vector\n";
+  myfile.close();
   auto instruction_set = detectInstructions();
 
   switch (instruction_set) {
