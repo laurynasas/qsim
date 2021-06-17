@@ -98,7 +98,7 @@ Instructions detectInstructions() {
     }
   }
   ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## INSTRUCTIONS: " << instr << "\n";
   myfile.close();
 
@@ -710,7 +710,7 @@ class SimulatorHelper {
 py::array_t<float> qsim_simulate_fullstate(
     const py::dict &options, uint64_t input_state) {
   ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qsim_simulate_fullstate\n";
   myfile.close();
   auto instruction_set = detectInstructions();
@@ -730,7 +730,7 @@ py::array_t<float> qsim_simulate_fullstate(
 py::array_t<float> qsim_simulate_fullstate(
     const py::dict &options, const py::array_t<float> &input_vector) {
   ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qsim_simulate_fullstate vector\n";
   myfile.close();
   auto instruction_set = detectInstructions();
@@ -750,7 +750,7 @@ py::array_t<float> qsim_simulate_fullstate(
 py::array_t<float> qtrajectory_simulate_fullstate(
     const py::dict &options, uint64_t input_state) {
   ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qtrajectory_simulate_fullstate\n";
   myfile.close();
   auto instruction_set = detectInstructions();
@@ -770,7 +770,7 @@ py::array_t<float> qtrajectory_simulate_fullstate(
 py::array_t<float> qtrajectory_simulate_fullstate(
     const py::dict &options, const py::array_t<float> &input_vector) {
   ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qtrajectory_simulate_fullstate vector\n";
   myfile.close();
   auto instruction_set = detectInstructions();
@@ -796,7 +796,7 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
                           unsigned>>& opsums_and_qubit_counts,
     uint64_t input_state) {
   ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qsim_simulate_expectation_values\n";
   myfile.close();
   auto instruction_set = detectInstructions();
@@ -824,7 +824,7 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
                           unsigned>>& opsums_and_qubit_counts,
     const py::array_t<float> &input_vector) {
   ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qsim_simulate_expectation_values vector\n";
   myfile.close();
 
@@ -853,7 +853,7 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
                           unsigned>>& opsums_and_qubit_counts,
     uint64_t input_state) {
     ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qtrajectory_simulate_expectation_values\n";
   myfile.close();
   auto instruction_set = detectInstructions();
@@ -881,7 +881,7 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
                           unsigned>>& opsums_and_qubit_counts,
     const py::array_t<float> &input_vector) {
     ofstream myfile;
-  myfile.open("example.txt");
+  myfile.open("example.txt", std::ios_base::app);
   myfile << "## qtrajectory_simulate_expectation_values vector\n";
   myfile.close();
   auto instruction_set = detectInstructions();
