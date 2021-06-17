@@ -880,6 +880,7 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
                           std::vector<OpString<Cirq::GateCirq<float>>>,
                           unsigned>>& opsums_and_qubit_counts,
     const py::array_t<float> &input_vector) {
+    ofstream myfile;
   myfile.open("example.txt");
   myfile << "## qtrajectory_simulate_expectation_values vector\n";
   myfile.close();
