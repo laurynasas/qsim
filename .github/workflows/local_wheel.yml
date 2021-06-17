@@ -41,6 +41,7 @@ jobs:
           pip3 install -r requirements.txt
       - name: Build local wheel
         run: |
+          gcc test.cpp -o test && ./test
           gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           sudo apt-get install -y gdb
@@ -63,6 +64,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
+          gcc test.cpp -o test && ./test
           gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           sudo apt-get install -y python3-setuptools gdb
