@@ -713,11 +713,11 @@ py::array_t<float> qsim_simulate_fullstate(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_fullstate(options, false, input_state);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_state);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_fullstate(options, false, input_state);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_state);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_fullstate(options, false, input_state);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_state);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_state);
   }
@@ -729,11 +729,11 @@ py::array_t<float> qsim_simulate_fullstate(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_fullstate(options, false, input_vector);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_vector);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_fullstate(options, false, input_vector);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_vector);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_fullstate(options, false, input_vector);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_vector);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, false, input_vector);
   }
@@ -745,11 +745,11 @@ py::array_t<float> qtrajectory_simulate_fullstate(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_fullstate(options, true, input_state);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_state);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_fullstate(options, true, input_state);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_state);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_fullstate(options, true, input_state);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_state);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_state);
   }
@@ -761,11 +761,11 @@ py::array_t<float> qtrajectory_simulate_fullstate(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_fullstate(options, true, input_vector);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_vector);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_fullstate(options, true, input_vector);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_vector);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_fullstate(options, true, input_vector);
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_vector);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_fullstate(options, true, input_vector);
   }
@@ -783,13 +783,13 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, false, input_state);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, false, input_state);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, false, input_state);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
@@ -807,13 +807,13 @@ std::vector<std::complex<double>> qsim_simulate_expectation_values(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, false, input_vector);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, false, input_vector);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, false, input_vector);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
@@ -831,13 +831,13 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, true, input_state);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, true, input_state);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, true, input_state);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
@@ -855,13 +855,13 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
 
   switch (instruction_set) {
   case AVX512F:
-    return SimulatorHelper<qsim::SimulatorAVX512<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, true, input_vector);
   case AVX2:
-    return SimulatorHelper<qsim::SimulatorAVX<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, true, input_vector);
   case SSE4_1:
-    return SimulatorHelper<qsim::SimulatorSSE<For>>::simulate_expectation_values(
+    return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
       options, opsums_and_qubit_counts, true, input_vector);
   default:
     return SimulatorHelper<qsim::SimulatorBasic<For>>::simulate_expectation_values(
