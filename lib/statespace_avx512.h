@@ -26,6 +26,7 @@
 #include "statespace.h"
 #include "util.h"
 #include "vectorspace.h"
+#include "statespace_avx.h"
 
 namespace qsim {
 
@@ -48,16 +49,6 @@ inline unsigned GetZeroMaskAVX512(uint64_t i, uint64_t mask, uint64_t bits) {
   return (m2 << 8) | m1;
 }
 
-inline double HorizontalSumAVX(__m256 s) {
-  __m128 l = _mm256_castps256_ps128(s);
-  __m128 h = _mm256_extractf128_ps(s, 1);
-  __m128 s1  = _mm_add_ps(h, l);
-  __m128 s1s = _mm_movehdup_ps(s1);
-  __m128 s2 = _mm_add_ps(s1, s1s);
-
-  return _mm_cvtss_f32(_mm_add_ss(s2, _mm_movehl_ps(s1s, s2)));
-}
-
 inline double HorizontalSumAVX512(__m512 s) {
   __m256 l = _mm512_castps512_ps256(s);
   __m512d sd = _mm512_castps_pd(s);
@@ -65,7 +56,7 @@ inline double HorizontalSumAVX512(__m512 s) {
   __m256 h = _mm256_castpd_ps(hd);
   __m256 p = _mm256_add_ps(h, l);
 
-  return HorizontalSumAVX(p);
+  return qsim::detail::HorizontalSumAVX(p);
 }
 
 }  // namespace detail
