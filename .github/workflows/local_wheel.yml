@@ -16,7 +16,7 @@ jobs:
           brew install libomp
       - name: Build local wheel
         run: |
-          gcc -O2 -march=knl -dM -E - < /dev/null | egrep "SSE|AVX" | sort
+          gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
           ls -lah dist/
@@ -28,7 +28,7 @@ jobs:
       - name: Run tests
         run: |
           rm -rf qsimcirq/
-          gdb --args python -m pytest qsimcirq_tests/qsimcirq_test.py
+          pytest qsimcirq_tests/qsimcirq_test.py
 #          ls -lah . && cat o.txt
   run_test_ubuntu_20_04:
     name: Check that Ubuntu 20.04 package can be installed from local pip
