@@ -75,8 +75,7 @@ jobs:
       - name: Run tests
         run: |
           rm -rf qsimcirq/
-          pip install pytest
-          gdb -ex=run -ex=backtrace --return-child-result --args python -m pytest qsimcirq_tests/qsimcirq_test.py
+          pytest qsimcirq_tests/qsimcirq_test.py
 #          ls -lah . && cat o.txt
   run_test_win:
     name: Check that Windows Server 2019 package can be installed from local pip
