@@ -16,7 +16,7 @@ jobs:
           brew install libomp
       - name: Build local wheel
         run: |
-          gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
+          g++ -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
           ls -lah dist/
@@ -41,7 +41,7 @@ jobs:
           pip3 install -r requirements.txt
       - name: Build local wheel
         run: |
-          gcc test.cpp -o test && ./test
+          g++ test.cpp -o test && ./test
           gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           sudo apt-get install -y gdb
