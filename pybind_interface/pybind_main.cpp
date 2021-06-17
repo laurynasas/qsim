@@ -38,7 +38,7 @@
 
 #ifndef PYBIND_MAIN
 #define  PYBIND_MAIN
-#include "../lib/simulator_avx512.h"
+//#include "../lib/simulator_avx512.h"
 #include "../lib/simulator_avx.h"
 #include "../lib/simulator_sse.h"
 #include "../lib/simulator_basic.h"
