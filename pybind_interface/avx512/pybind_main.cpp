@@ -62,6 +62,7 @@ struct Factory {
 
 template <typename T>
 T parseOptions(const py::dict &options, const char *key) {
+  std::sprintf(">>AVX pybind!");
   if (!options.contains(key)) {
     char msg[100];
     std::sprintf(msg, "Argument %s is not provided.\n", key);
