@@ -16,7 +16,7 @@ import numpy as np
 import sympy
 import cirq
 import pytest
-import qsimcirqq as qsimcirq
+import qsimcirq
 
 
 class NoiseTrigger(cirq.SingleQubitGate):
