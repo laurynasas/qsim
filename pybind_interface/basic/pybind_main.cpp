@@ -425,10 +425,6 @@ std::vector<std::complex<float>> qsim_simulate(const py::dict &options) {
     return {};
   }
   Runner::Run(param, Factory(num_threads), circuit, measure);
-  ofstream myfile;
-  myfile.open("example.txt", std::ios_base::app);
-  myfile << "## BASIC pybind: \n";
-  myfile.close();
   return amplitudes;
 }
 
