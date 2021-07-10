@@ -17,12 +17,15 @@ jobs:
           gcc -fopenmp -march=native -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           mkdir dist
-          wget --no-check-certificate https://www.dropbox.com/s/j6zgnzmicsb1c85/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl%206?dl=0 -O dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
+          wget --no-check-certificate https://www.dropbox.com/s/56nlxbcqeafho22/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl%205?dl=0 -O dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
           pip3 install --no-cache-dir -vvv dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
       - name: Run tests
         run: |
+          sudo apt-get install -y gdb
+          ulimit -c unlimited
+          sudo sysctl -w kernel.core_uses_pid=1
           rm -rf qsimcirq/
-          pytest qsimcirq_tests/qsimcirq_test.py
+          gdb `pytest qsimcirq_tests/qsimcirq_test.py`
           ls -la
           find . -name 'example.txt'
           cat ./example.txt
@@ -35,10 +38,6 @@ jobs:
 #        run: |
 #          auditwheel repair dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
 #          twine upload --skip-existing ./wheelhouse/*.whl
-
-
-
-
 
 
 
