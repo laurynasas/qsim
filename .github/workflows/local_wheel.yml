@@ -46,7 +46,7 @@ jobs:
           gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           sudo apt-get install -y gdb
-          pip3 install wheel twine
+          pip3 install wheel twine auditwheel
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
         run: |
@@ -58,13 +58,15 @@ jobs:
           find . -name 'example.txt'
           cat ./example.txt
 #          ls -lah . && cat o.txt
+      -
       - name: Upload wheel binary to PyPI
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USER }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
           TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
         run: |
-          twine upload --skip-existing ./dist/*.whl
+          auditwheel repair dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
+          twine upload --skip-existing ./wheelhouse/*.whl
   run_test_ubuntu_18_04:
     name: Check that Ubuntu 18.04 package can be installed from local pip
     runs-on: ubuntu-18.04
