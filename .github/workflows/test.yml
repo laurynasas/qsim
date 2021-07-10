@@ -1,4 +1,4 @@
-name: local wheel test
+name: test
 
 on:
   push:
