@@ -64,15 +64,18 @@ jobs:
           pytest qsimcirq_tests/qsimcirq_test.py || echo "failure!"
           find . -name 'example.txt'
           cat ./example.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ./dist/*.whl
 #          ls -lah . && cat o.txt
-      - name: Upload wheel binary to PyPI
-        env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USER }}
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-          TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
-        run: |
-          auditwheel repair dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
-          twine upload --skip-existing ./wheelhouse/*.whl
+#      - name: Upload wheel binary to PyPI
+#        env:
+#          TWINE_USERNAME: ${{ secrets.PYPI_USER }}
+#          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+#          TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
+#        run: |
+#          auditwheel repair dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
+#          twine upload --skip-existing ./wheelhouse/*.whl
   run_test_ubuntu_18_04:
     name: Check that Ubuntu 18.04 package can be installed from local pip
     runs-on: ubuntu-18.04
