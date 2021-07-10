@@ -35,7 +35,7 @@
 #include "../../lib/run_qsimh.h"
 #include "../../lib/util.h"
 
-#include "simulator_basic.h"
+#include "../../lib/simulator_basic.h"
 namespace qsim {
   template <typename For>
   using Simulator = SimulatorBasic<For>;
