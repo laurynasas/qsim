@@ -3,7 +3,6 @@ name: local wheel test
 on:
   push:
 
-
 jobs:
   run_test_macos_10_15:
     name: Check that MacOS 10.15 package can be installed from local pip
