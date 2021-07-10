@@ -42,6 +42,7 @@ namespace qsim {
 }
 
 using namespace qsim;
+using namespace std;
 
 namespace {
 
@@ -66,7 +67,7 @@ template <typename T>
 T parseOptions(const py::dict &options, const char *key) {
   ofstream myfile;
   myfile.open("example.txt", std::ios_base::app);
-  myfile << "## SSE pybind: " << instr << "\n";
+  myfile << "## SSE pybind: \n";
   myfile.close();
   if (!options.contains(key)) {
     char msg[100];
