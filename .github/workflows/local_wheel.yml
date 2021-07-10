@@ -50,7 +50,7 @@ jobs:
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
         run: |
-          pip3 install dist/qsimcirq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
+          pip3 install dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
       - name: Run tests
         run: |
           rm -rf qsimcirq/
