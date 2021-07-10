@@ -46,7 +46,7 @@ jobs:
           gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           sudo apt-get install -y gdb
-          pip3 install wheel
+          pip3 install wheel twine
           python3 setup.py sdist bdist_wheel
       - name: Install QSim
         run: |
