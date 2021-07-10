@@ -32,7 +32,7 @@
 #include "../../lib/run_qsimh.h"
 #include "../../lib/util.h"
 
-#include "simulator_sse.h"
+#include "../../lib/simulator_sse.h"
 namespace qsim {
   template <typename For>
   using Simulator = SimulatorSSE<For>;

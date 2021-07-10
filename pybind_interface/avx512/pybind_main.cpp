@@ -32,7 +32,7 @@
 #include "../../lib/run_qsimh.h"
 #include "../../lib/util.h"
 
-#include "simulator_avx512.h"
+#include "../../lib/simulator_avx512.h"
 
 namespace qsim {
   template <typename For>
