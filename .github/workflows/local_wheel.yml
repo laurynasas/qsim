@@ -50,7 +50,7 @@ jobs:
           pip3 install -r requirements.txt
       - name: Build local wheel
         run: |
-          gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
+          gcc -fopenmp -march=native -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           sudo apt-get install -y gdb
           pip3 install wheel
