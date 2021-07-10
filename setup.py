@@ -81,7 +81,7 @@ __version__ = ""
 exec(open("qsimcirq/_version.py").read())
 
 setup(
-    name="qsimcirq",
+    name="qsimcirqq",
     version=__version__,
     author="Vamsi Krishna Devabathini",
     author_email="devabathini92@gmail.com",

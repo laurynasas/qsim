@@ -32,8 +32,8 @@ from cirq.sim.simulator import SimulatesExpectationValues
 
 import numpy as np
 
-from qsimcirq import qsim_sse as qsim
-import qsimcirq.qsim_circuit as qsimc
+from qsimcirqq import qsim_sse as qsim
+import qsimcirqq.qsim_circuit as qsimc
 
 
 class QSimSimulatorState(sim.StateVectorSimulatorState):
