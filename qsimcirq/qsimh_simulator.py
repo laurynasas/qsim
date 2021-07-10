@@ -16,9 +16,9 @@ from typing import Union, Sequence
 
 from cirq import study, ops, protocols, circuits, value, SimulatesAmplitudes
 
-from qsimcirqq import qsim_sse as qsim
+from qsimcirq import qsim_sse as qsim
 
-import qsimcirqq.qsim_circuit as qsimc
+import qsimcirq.qsim_circuit as qsimc
 
 class QSimhSimulator(SimulatesAmplitudes):
     def __init__(self, qsimh_options: dict = {}):

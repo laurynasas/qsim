@@ -16,7 +16,7 @@ import numpy as np
 import warnings
 
 import cirq
-from qsimcirqq import qsim_sse as qsim
+from qsimcirq import qsim_sse as qsim
 from typing import Dict, Union
 
 
