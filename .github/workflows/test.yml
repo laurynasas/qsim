@@ -25,7 +25,7 @@ jobs:
           ulimit -c unlimited
           sudo sysctl -w kernel.core_uses_pid=1
           rm -rf qsimcirq/
-          gdb --args python pytest qsimcirq_tests/qsimcirq_test.py
+          gdb --args python -m pytest qsimcirq_tests/qsimcirq_test.py
           ls -la
           find . -name 'example.txt'
           cat ./example.txt
