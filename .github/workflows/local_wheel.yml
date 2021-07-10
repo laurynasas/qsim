@@ -64,7 +64,7 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
           TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
         run: |
-          twine upload --skip-existing ./wheelhouse/*.whl
+          twine upload --skip-existing ./dist/*.whl
   run_test_ubuntu_18_04:
     name: Check that Ubuntu 18.04 package can be installed from local pip
     runs-on: ubuntu-18.04
