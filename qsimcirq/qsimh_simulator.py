@@ -20,7 +20,6 @@ from qsimcirq import qsim_sse as qsim
 
 import qsimcirq.qsim_circuit as qsimc
 
-
 class QSimhSimulator(SimulatesAmplitudes):
     def __init__(self, qsimh_options: dict = {}):
         """Creates a new QSimhSimulator using the given options.
