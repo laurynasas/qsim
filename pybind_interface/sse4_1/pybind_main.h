@@ -24,10 +24,11 @@ namespace py = pybind11;
 
 #include <vector>
 
-#include "../lib/circuit.h"
-#include "../lib/expect.h"
-#include "../lib/gates_cirq.h"
-#include "../lib/qtrajectory.h"
+
+#include "../../lib/circuit.h"
+#include "../../lib/expect.h"
+#include "../../lib/gates_cirq.h"
+#include "../../lib/qtrajectory.h"
 
 // Methods for mutating noiseless circuits.
 void add_gate(const qsim::Cirq::GateKind gate_kind, const unsigned time,
