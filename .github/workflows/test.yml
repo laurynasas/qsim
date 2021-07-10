@@ -14,7 +14,7 @@ jobs:
           pip3 install -r requirements.txt
       - name: Install QSim
         run: |
-          gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
+          gcc -fopenmp -march=native -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           mkdir dist
           wget --no-check-certificate https://www.dropbox.com/s/v12kumwvlt4odlw/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl\?dl\=0 -O dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
