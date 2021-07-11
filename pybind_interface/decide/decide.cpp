@@ -16,9 +16,9 @@ void cpuid(int info[4], int infoType){
 
 #endif
 
-enum Instructions { AVX512F, AVX2, SSE4_1, BASIC };
+enum Instructions { AVX512F = 0, AVX2 = 1, SSE4_1 = 2, BASIC = 3};
 
-Instructions detect_instructions() {
+int detect_instructions() {
   Instructions instr = BASIC;
   int info[4];
 
@@ -40,7 +40,7 @@ Instructions detect_instructions() {
     }
   }
 
-  return instr;
+  return static_cast<int>(instr);
 }
 
 PYBIND11_MODULE(qsim_decide, m) {
