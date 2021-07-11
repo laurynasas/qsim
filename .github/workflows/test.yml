@@ -30,10 +30,10 @@ jobs:
           sudo service apport start
           service --status-all | grep apport
           rm -rf qsimcirq/
-          pytest qsimcirq_tests/qsimcirq_test.py || echo "failure!"
-          ls -la /var/crash/
-          cat /var/log/apport.log
-          gdb -c ./core.* -ex=backtrace
+          gdb -ex=run -ex=backtrace --return-child-result --args python -m pytest qsimcirq_tests/qsimcirq_test.py
+#          ls -la /var/crash/
+#          cat /var/log/apport.log
+#          gdb -c ./core.* -ex=backtrace
 
 #      - uses: actions/upload-artifact@v2
 #        with:
