@@ -33,7 +33,7 @@ jobs:
           pytest qsimcirq_tests/qsimcirq_test.py || echo "failure!"
           ls -la /var/crash/
           cat /var/log/apport.log
-          gdb -c ./core.* bt
+          gdb -c ./core.* -ex=backtrace
 
 #      - uses: actions/upload-artifact@v2
 #        with:
