@@ -16,7 +16,19 @@ import numpy as np
 import warnings
 
 import cirq
-from qsimcirq import qsim_sse as qsim
+from qsimcirq import qsim_decide
+
+instr = qsim_decide.detect_instructions()
+
+if instr == 0:
+    from qsimcirq import qsim_avx512 as qsim
+elif instr == 1:
+    from qsimcirq import qsim_avx2 as qsim
+elif instr == 2:
+    from qsimcirq import qsim_sse as qsim
+else:
+    from qsimcirq import qsim_basic as qsim
+
 from typing import Dict, Union
 
 

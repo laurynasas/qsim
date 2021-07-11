@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(qsim)
 
-set(CMAKE_CXX_FLAGS "-mavx512f -O0 -fopenmp")
+set(CMAKE_CXX_FLAGS "-mavx2 -O0 -fopenmp")
 
 if(APPLE)
     set(CMAKE_CXX_STANDARD 14)
@@ -21,4 +21,4 @@ if(NOT pybind11_POPULATED)
   FetchContent_Populate(pybind11)
   add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
 endif()
-pybind11_add_module(qsim_avx512 pybind_main.cpp)
+pybind11_add_module(qsim_avx2 pybind_main.cpp)

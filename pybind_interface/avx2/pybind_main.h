@@ -134,7 +134,7 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
 // Hybrid simulator.
 std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
 
-PYBIND11_MODULE(qsim_avx512, m) {
+PYBIND11_MODULE(qsim_avx2, m) {
   m.doc() = "pybind11 plugin";  // optional module docstring
 
   // Methods for returning amplitudes
