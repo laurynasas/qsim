@@ -28,6 +28,7 @@ jobs:
           cat /proc/sys/kernel/core_pattern
           sudo systemctl enable apport.service
           sudo service apport start
+          service --status-all | grep apport
           rm -rf qsimcirq/
           pytest qsimcirq_tests/qsimcirq_test.py || echo "failure!"
           ls -la /var/crash/
