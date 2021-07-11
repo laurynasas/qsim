@@ -109,7 +109,7 @@ setup(
     description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    ext_modules=[CMakeExtension("qsimcirq/qsim_avx", simd="avx", sourcedir="./pybind_interface/avx512/"), CMakeExtension("qsimcirq/qsim_sse",  simd="sse", sourcedir="./pybind_interface/sse4_1/"), CMakeExtension("qsimcirq/qsim_basic", sourcedir="./pybind_interface/basic/")],
+    ext_modules=[CMakeExtension("qsimcirq/qsim_avx", simd="avx"), CMakeExtension("qsimcirq/qsim_sse",  simd="sse"), CMakeExtension("qsimcirq/qsim_basic")],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     packages=["qsimcirq"],
