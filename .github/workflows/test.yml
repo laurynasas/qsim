@@ -17,7 +17,7 @@ jobs:
           gcc -fopenmp -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           mkdir dist
-          wget --no-check-certificate https://www.dropbox.com/s/af6fje3rvd80kiu/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl%208?dl=0 -O dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
+          wget --no-check-certificate https://www.dropbox.com/s/fem7cxnm5n4hrqx/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl%209?dl=0 -O dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
           pip3 install --no-cache-dir -vvv dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
       - name: Run tests
         run: |
@@ -31,6 +31,7 @@ jobs:
           service --status-all | grep apport
           rm -rf qsimcirq/
           gdb -ex=run -ex=backtrace --return-child-result --args python -m pytest qsimcirq_tests/qsimcirq_test.py
+          cat ./example.txt
 #          ls -la /var/crash/
 #          cat /var/log/apport.log
 #          gdb -c ./core.* -ex=backtrace
