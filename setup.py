@@ -81,10 +81,10 @@ class CMakeBuild(build_ext):
         print(f"--> CMAKE ARGS {cmake_args}")
         print(f"--> BUILD ARGS {build_args}")
         subprocess.check_call(
-            ["cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env
+            ["set -x && cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env
         )
         subprocess.check_call(
-            ["cmake", "--build", "."] + build_args, cwd=self.build_temp
+            ["set -x && cmake", "--build", "."] + build_args, cwd=self.build_temp
         )
 
 
