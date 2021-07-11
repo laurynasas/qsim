@@ -70,7 +70,7 @@ class CMakeBuild(build_ext):
         if platform.system() != "Windows":
             if ext.simd == "avx":
                 cmake_args += [
-                    '-DCMAKE_CXX_FLAGS=-mavx512f"'
+                    '-DCMAKE_CXX_FLAGS=-mavx512f'
                 ]
             elif ext.simd == "sse":
                 cmake_args += [
