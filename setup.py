@@ -70,11 +70,11 @@ class CMakeBuild(build_ext):
         if platform.system() != "Windows":
             if ext.simd == "avx":
                 cmake_args += [
-                    '-DCMAKE_CXX_FLAGS=-mavx512f'
+                    '-DCMAKE_CXX_FLAGS=-mavx512f -O0 -fopenmp '
                 ]
             elif ext.simd == "sse":
                 cmake_args += [
-                    '-DCMAKE_CXX_FLAGS=-msse4.1'
+                    '-DCMAKE_CXX_FLAGS=-msse4.1 -O0 -fopenmp'
                 ]
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
