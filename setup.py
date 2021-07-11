@@ -109,7 +109,7 @@ setup(
     description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    ext_modules=[CMakeExtension("qsimcirq/qsim_avx512", simd="avx"), CMakeExtension("qsimcirq/qsim_sse",  simd="sse"), CMakeExtension("qsimcirq/qsim_basic")],
+    ext_modules=[CMakeExtension("qsimcirq/qsim_avx512", simd="avx")],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     packages=["qsimcirq"],
