@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 project(qsim)
 
+set(CMAKE_CXX_FLAGS "-mavx512f -O0 -fopenmp")
+
 if(APPLE)
     set(CMAKE_CXX_STANDARD 14)
     include_directories("/usr/local/include" "/usr/local/opt/llvm/include")
