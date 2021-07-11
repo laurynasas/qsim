@@ -10,10 +10,11 @@ from distutils.version import LooseVersion
 
 
 class CMakeExtension(Extension):
-    def __init__(self, name, sourcedir="", simd="basic"):
+    def __init__(self, name, sourcedir="", simd="basic", build_dir="."):
         Extension.__init__(self, name, sources=[])
         self.sourcedir = os.path.abspath(sourcedir)
         self.simd = simd
+        self.build_dir = build_dir
 
 
 class CMakeBuild(build_ext):
@@ -84,7 +85,7 @@ class CMakeBuild(build_ext):
             ["cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env
         )
         subprocess.check_call(
-            ["cmake", "--build", "."] + build_args, cwd=self.build_temp
+            ["cmake", "--build", ext.build_dir] + build_args, cwd=self.build_temp
         )
 
 
@@ -109,7 +110,7 @@ setup(
     description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    ext_modules=[CMakeExtension("qsimcirq/qsim_avx", simd="avx"), CMakeExtension("qsimcirq/qsim_sse",  simd="sse"), CMakeExtension("qsimcirq/qsim_basic")],
+    ext_modules=[CMakeExtension("qsimcirq/qsim_avx", simd="avx", build_dir="./pybind_interface/avx512/"), CMakeExtension("qsimcirq/qsim_sse",  simd="sse", build_dir="./pybind_interface/sse4_1/"), CMakeExtension("qsimcirq/qsim_basic", build_dir="./pybind_interface/basic/")],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     packages=["qsimcirq"],
