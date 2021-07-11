@@ -68,11 +68,11 @@ class CMakeBuild(build_ext):
             env.get("CXXFLAGS", ""), self.distribution.get_version()
         )
         if platform.system() != "Windows":
-            if self.simd == "avx":
+            if ext.simd == "avx":
                 cmake_args += [
                     '-DCMAKE_CXX_FLAGS=\\"-mavx512f\\"'
                 ]
-            elif self.simd == "sse":
+            elif ext.simd == "sse":
                 cmake_args += [
                     '-DCMAKE_CXX_FLAGS=\\"-msse4.1\\"'
                 ]
