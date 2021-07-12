@@ -13,12 +13,11 @@
 # limitations under the License.
 
 from typing import Union, Sequence
-
 from cirq import study, ops, protocols, circuits, value, SimulatesAmplitudes
 
 from qsimcirq import qsim_decide
 import importlib
-
+import sys
 import qsimcirq.qsim_circuit as qsimc
 
 class QSimhSimulator(SimulatesAmplitudes):
@@ -55,6 +54,7 @@ class QSimhSimulator(SimulatesAmplitudes):
         else:
             print("----> circ 3")
             qsim = importlib.import_module("qsimcirq.qsim_basic")
+        sys.modules["qsim"] = qsim
 
     def compute_amplitudes_sweep(
         self,

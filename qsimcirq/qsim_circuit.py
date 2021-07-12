@@ -14,7 +14,7 @@
 
 import numpy as np
 import warnings
-
+import sys
 import cirq
 from qsimcirq import qsim_decide
 import importlib
@@ -288,6 +288,7 @@ class QSimCircuit(cirq.Circuit):
         else:
             print("----> circ 3")
             qsim = importlib.import_module("qsimcirq.qsim_basic")
+        sys.modules["qsim"] = qsim
 
     def _resolve_parameters_(
         self, param_resolver: cirq.study.ParamResolver, recursive: bool = True

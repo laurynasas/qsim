@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
-
+import sys
 from cirq import (
     circuits,
     linalg,
@@ -125,6 +125,7 @@ class QSimSimulator(
         else:
             print("----> circ 3")
             qsim = importlib.import_module("qsimcirq.qsim_basic")
+        sys.modules["qsim"] = qsim
 
     def get_seed(self):
         # Limit seed size to 32-bit integer for C++ conversion.
