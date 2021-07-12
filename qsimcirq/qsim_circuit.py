@@ -176,7 +176,7 @@ def _control_details(gate: cirq.ops.ControlledGate, qubits):
 def add_op_to_opstring(
     qsim_op: cirq.GateOperation,
     qubit_to_index_dict: Dict[cirq.Qid, int],
-    opstring: qsim.OpString,
+    opstring,
 ):
     """Adds an operation to an opstring (observable).
 
@@ -302,7 +302,7 @@ class QSimCircuit(cirq.Circuit):
 
     def translate_cirq_to_qsim(
         self, qubit_order: cirq.ops.QubitOrderOrList = cirq.ops.QubitOrder.DEFAULT
-    ) -> qsim.Circuit:
+    ):
         """
         Translates this Cirq circuit to the qsim representation.
         :qubit_order: Ordering of qubits
@@ -352,7 +352,7 @@ class QSimCircuit(cirq.Circuit):
 
     def translate_cirq_to_qtrajectory(
         self, qubit_order: cirq.ops.QubitOrderOrList = cirq.ops.QubitOrder.DEFAULT
-    ) -> qsim.NoisyCircuit:
+    ):
         """
         Translates this noisy Cirq circuit to the qsim representation.
         :qubit_order: Ordering of qubits
