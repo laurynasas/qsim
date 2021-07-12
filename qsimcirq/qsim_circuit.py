@@ -202,7 +202,7 @@ def add_op_to_circuit(
     qsim_op: cirq.GateOperation,
     time: int,
     qubit_to_index_dict: Dict[cirq.Qid, int],
-    circuit: Union[qsim.Circuit, qsim.NoisyCircuit],
+    circuit,
 ):
     """Adds an operation to a noisy or noiseless circuit."""
     qsim_gate = qsim_op.gate
