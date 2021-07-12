@@ -14,10 +14,7 @@
 
 import numpy as np
 import warnings
-import sys
 import cirq
-from qsimcirq import qsim_decide
-import importlib
 
 from typing import Dict, Union
 
@@ -258,7 +255,6 @@ class QSimCircuit(cirq.Circuit):
         device: cirq.devices = cirq.devices.UNCONSTRAINED_DEVICE,
         allow_decomposition: bool = False,
     ):
-        self._load_simd_qsim()
         if allow_decomposition:
             super().__init__([], device=device)
             for moment in cirq_circuit:
@@ -274,21 +270,6 @@ class QSimCircuit(cirq.Circuit):
         # equality is tested, for the moment, for cirq.Circuit
         return super().__eq__(other)
 
-    def _load_simd_qsim(self):
-        instr = qsim_decide.detect_instructions()
-        if instr == 0:
-            print("----> circ 0")
-            qsim = importlib.import_module("qsimcirq.qsim_avx512")
-        elif instr == 1:
-            print("----> circ 1")
-            qsim = importlib.import_module("qsimcirq.qsim_avx2")
-        elif instr == 2:
-            print("----> circ 2")
-            qsim = importlib.import_module("qsimcirq.qsim_sse")
-        else:
-            print("----> circ 3")
-            qsim = importlib.import_module("qsimcirq.qsim_basic")
-        sys.modules["qsim"] = qsim
 
     def _resolve_parameters_(
         self, param_resolver: cirq.study.ParamResolver, recursive: bool = True

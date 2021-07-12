@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
-import sys
 from cirq import (
     circuits,
     linalg,
@@ -31,8 +30,6 @@ from cirq import (
 from cirq.sim.simulator import SimulatesExpectationValues
 
 import numpy as np
-from qsimcirq import qsim_decide
-import importlib
 
 
 class QSimSimulatorState(sim.StateVectorSimulatorState):
@@ -101,7 +98,6 @@ class QSimSimulator(
             ValueError if internal keys 'c', 'i' or 's' are included in 'qsim_options'.
         """
 
-        self._load_simd_qsim()
         if any(k in qsim_options for k in ("c", "i", "s")):
             raise ValueError(
                 'Keys {"c", "i", "s"} are reserved for internal use and cannot be '
@@ -111,21 +107,6 @@ class QSimSimulator(
         self.qsim_options = {"t": 1, "f": 2, "v": 0, "r": 1}
         self.qsim_options.update(qsim_options)
 
-    def _load_simd_qsim(self):
-        instr = qsim_decide.detect_instructions()
-        if instr == 0:
-            print("----> circ 0")
-            qsim = importlib.import_module("qsimcirq.qsim_avx512")
-        elif instr == 1:
-            print("----> circ 1")
-            qsim = importlib.import_module("qsimcirq.qsim_avx2")
-        elif instr == 2:
-            print("----> circ 2")
-            qsim = importlib.import_module("qsimcirq.qsim_sse")
-        else:
-            print("----> circ 3")
-            qsim = importlib.import_module("qsimcirq.qsim_basic")
-        sys.modules["qsim"] = qsim
 
     def get_seed(self):
         # Limit seed size to 32-bit integer for C++ conversion.
