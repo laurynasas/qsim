@@ -51,6 +51,7 @@ def _load_simd_qsim():
         qsim = importlib.import_module("qsimcirq.qsim_basic")
     sys.modules["qsim"] = qsim
     return qsim
+import qsimcirq.qsim_circuit as qsimc
 
 
 qsim = _load_simd_qsim()
