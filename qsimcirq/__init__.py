@@ -4,7 +4,7 @@ import importlib
 import sys
 
 
-def load_simd_qsim():
+def _load_simd_qsim():
     instr = qsim_decide.detect_instructions()
     if instr == 0:
         print("----> circ 0")
@@ -20,7 +20,9 @@ def load_simd_qsim():
         qsim = importlib.import_module("qsimcirq.qsim_basic")
     sys.modules["qsim"] = qsim
 
-load_simd_qsim()
+
+# _load_simd_qsim()
+from qsimcirq import qsim_sse as qsim
 from .qsim_circuit import add_op_to_opstring, add_op_to_circuit, QSimCircuit
 from .qsim_simulator import QSimSimulatorState, QSimSimulatorTrialResult, QSimSimulator
 from .qsimh_simulator import QSimhSimulator

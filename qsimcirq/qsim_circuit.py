@@ -20,7 +20,6 @@ from typing import Dict, Union
 
 
 
-
 # List of parameter names that appear in valid Cirq protos.
 GATE_PARAMS = [
     "exponent",
