@@ -17,6 +17,7 @@ import warnings
 import cirq
 
 from typing import Dict, Union
+from . import qsim
 
 
 

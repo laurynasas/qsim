@@ -21,8 +21,7 @@ def _load_simd_qsim():
     sys.modules["qsim"] = qsim
 
 
-# _load_simd_qsim()
-from qsimcirq import qsim_sse as qsim
+_load_simd_qsim()
 from .qsim_circuit import add_op_to_opstring, add_op_to_circuit, QSimCircuit
 from .qsim_simulator import QSimSimulatorState, QSimSimulatorTrialResult, QSimSimulator
 from .qsimh_simulator import QSimhSimulator

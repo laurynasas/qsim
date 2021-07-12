@@ -30,6 +30,7 @@ from cirq import (
 from cirq.sim.simulator import SimulatesExpectationValues
 
 import numpy as np
+from . import qsim
 
 
 class QSimSimulatorState(sim.StateVectorSimulatorState):

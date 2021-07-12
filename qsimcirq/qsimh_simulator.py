@@ -14,6 +14,7 @@
 
 from typing import Union, Sequence
 from cirq import study, ops, protocols, circuits, value, SimulatesAmplitudes
+from . import qsim
 
 import qsimcirq.qsim_circuit as qsimc
 
