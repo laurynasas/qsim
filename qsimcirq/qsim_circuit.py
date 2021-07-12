@@ -37,9 +37,10 @@ def _load_simd_qsim():
         print("----> circ 3")
         qsim = importlib.import_module("qsimcirq.qsim_basic")
     sys.modules["qsim"] = qsim
+    return qsim
 
 
-_load_simd_qsim()
+qsim = _load_simd_qsim()
 
 
 # List of parameter names that appear in valid Cirq protos.
@@ -176,7 +177,7 @@ def _control_details(gate: cirq.ops.ControlledGate, qubits):
 def add_op_to_opstring(
     qsim_op: cirq.GateOperation,
     qubit_to_index_dict: Dict[cirq.Qid, int],
-    opstring,
+    opstring: qsim.OpString,
 ):
     """Adds an operation to an opstring (observable).
 
@@ -202,7 +203,7 @@ def add_op_to_circuit(
     qsim_op: cirq.GateOperation,
     time: int,
     qubit_to_index_dict: Dict[cirq.Qid, int],
-    circuit,
+    circuit: Union[qsim.Circuit, qsim.NoisyCircuit],
 ):
     """Adds an operation to a noisy or noiseless circuit."""
     qsim_gate = qsim_op.gate
@@ -302,7 +303,7 @@ class QSimCircuit(cirq.Circuit):
 
     def translate_cirq_to_qsim(
         self, qubit_order: cirq.ops.QubitOrderOrList = cirq.ops.QubitOrder.DEFAULT
-    ):
+    ) -> qsim.Circuit:
         """
         Translates this Cirq circuit to the qsim representation.
         :qubit_order: Ordering of qubits
@@ -352,7 +353,7 @@ class QSimCircuit(cirq.Circuit):
 
     def translate_cirq_to_qtrajectory(
         self, qubit_order: cirq.ops.QubitOrderOrList = cirq.ops.QubitOrder.DEFAULT
-    ):
+    ) -> qsim.NoisyCircuit:
         """
         Translates this noisy Cirq circuit to the qsim representation.
         :qubit_order: Ordering of qubits

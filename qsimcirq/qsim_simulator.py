@@ -50,9 +50,10 @@ def _load_simd_qsim():
         print("----> circ 3")
         qsim = importlib.import_module("qsimcirq.qsim_basic")
     sys.modules["qsim"] = qsim
+    return qsim
 
 
-_load_simd_qsim()
+qsim = _load_simd_qsim()
 
 class QSimSimulatorState(sim.StateVectorSimulatorState):
     def __init__(self, qsim_data: np.ndarray, qubit_map: Dict[ops.Qid, int]):

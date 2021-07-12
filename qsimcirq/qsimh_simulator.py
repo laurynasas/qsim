@@ -34,10 +34,12 @@ def _load_simd_qsim():
         print("----> circ 3")
         qsim = importlib.import_module("qsimcirq.qsim_basic")
     sys.modules["qsim"] = qsim
+    return qsim
 
 
-_load_simd_qsim()
+qsim = _load_simd_qsim()
 import qsimcirq.qsim_circuit as qsimc
+
 
 class QSimhSimulator(SimulatesAmplitudes):
     def __init__(self, qsimh_options: dict = {}):
