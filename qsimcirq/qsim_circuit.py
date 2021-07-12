@@ -17,21 +17,7 @@ import warnings
 
 import cirq
 from qsimcirq import qsim_decide
-
-instr = qsim_decide.detect_instructions()
-
-if instr == 0:
-    print("----> 0")
-    from qsimcirq import qsim_avx512 as qsim
-elif instr == 1:
-    print("----> 1")
-    from qsimcirq import qsim_avx2 as qsim
-elif instr == 2:
-    print("----> 2")
-    from qsimcirq import qsim_sse as qsim
-else:
-    print("----> 3")
-    from qsimcirq import qsim_basic as qsim
+import importlib
 
 from typing import Dict, Union
 
@@ -272,7 +258,7 @@ class QSimCircuit(cirq.Circuit):
         device: cirq.devices = cirq.devices.UNCONSTRAINED_DEVICE,
         allow_decomposition: bool = False,
     ):
-
+        self._load_simd_qsim()
         if allow_decomposition:
             super().__init__([], device=device)
             for moment in cirq_circuit:
@@ -287,6 +273,21 @@ class QSimCircuit(cirq.Circuit):
             return False
         # equality is tested, for the moment, for cirq.Circuit
         return super().__eq__(other)
+
+    def _load_simd_qsim(self):
+        instr = qsim_decide.detect_instructions()
+        if instr == 0:
+            print("----> circ 0")
+            qsim = importlib.import_module("qsimcirq.qsim_avx512")
+        elif instr == 1:
+            print("----> circ 1")
+            qsim = importlib.import_module("qsimcirq.qsim_avx2")
+        elif instr == 2:
+            print("----> circ 2")
+            qsim = importlib.import_module("qsimcirq.qsim_sse")
+        else:
+            print("----> circ 3")
+            qsim = importlib.import_module("qsimcirq.qsim_basic")
 
     def _resolve_parameters_(
         self, param_resolver: cirq.study.ParamResolver, recursive: bool = True

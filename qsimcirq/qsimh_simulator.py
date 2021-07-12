@@ -17,21 +17,7 @@ from typing import Union, Sequence
 from cirq import study, ops, protocols, circuits, value, SimulatesAmplitudes
 
 from qsimcirq import qsim_decide
-
-instr = qsim_decide.detect_instructions()
-
-if instr == 0:
-    print("----> 0")
-    from qsimcirq import qsim_avx512 as qsim
-elif instr == 1:
-    print("----> 1")
-    from qsimcirq import qsim_avx2 as qsim
-elif instr == 2:
-    print("----> 2")
-    from qsimcirq import qsim_sse as qsim
-else:
-    print("----> 3")
-    from qsimcirq import qsim_basic as qsim
+import importlib
 
 import qsimcirq.qsim_circuit as qsimc
 
@@ -51,8 +37,24 @@ class QSimhSimulator(SimulatesAmplitudes):
                     - 'w': int (>= 0). Prefix value.
                 See qsim/docs/usage.md for more details on these options.
         """
+        self._load_simd_qsim()
         self.qsimh_options = {"t": 1, "f": 2, "v": 0}
         self.qsimh_options.update(qsimh_options)
+
+    def _load_simd_qsim(self):
+        instr = qsim_decide.detect_instructions()
+        if instr == 0:
+            print("----> circ 0")
+            qsim = importlib.import_module("qsimcirq.qsim_avx512")
+        elif instr == 1:
+            print("----> circ 1")
+            qsim = importlib.import_module("qsimcirq.qsim_avx2")
+        elif instr == 2:
+            print("----> circ 2")
+            qsim = importlib.import_module("qsimcirq.qsim_sse")
+        else:
+            print("----> circ 3")
+            qsim = importlib.import_module("qsimcirq.qsim_basic")
 
     def compute_amplitudes_sweep(
         self,
