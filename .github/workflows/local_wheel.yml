@@ -11,17 +11,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
-          g++ test.cpp -o test && ./test
           sysctl -a | grep machdep
-          pip3 install -r requirements.txt
           brew install libomp
       - name: Build local wheel
         run: |
-          gcc -fopenmp -march=knl -mavx512f -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
-          ls -lah dist/
-          brew uninstall libomp
       - name: Install QSim
         run: |
           pip3 install dist/qsimcirq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
@@ -29,8 +24,7 @@ jobs:
       - name: Run tests
         run: |
           rm -rf qsimcirq/
-          pytest qsimcirq_tests/qsimcirq_test.py || echo "failure!"
-          cat ./example.txt
+          pytest qsimcirq_tests/qsimcirq_test.py
   run_test_ubuntu_20_04:
     name: Check that Ubuntu 20.04 package can be installed from local pip
     runs-on: ubuntu-20.04
