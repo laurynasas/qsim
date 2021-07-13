@@ -65,7 +65,7 @@ jobs:
           pytest qsimcirq_tests/qsimcirq_test.py || echo "failure!"
           cat ./build_log ||  echo "$$$ no build log!"
           find . -name 'example.txt'
-          cat ./example.txt
+          cat ./example.txt ||  echo "$$$ no example.txt!"
       - uses: actions/upload-artifact@v2
         with:
           path: ./dist/*.whl
