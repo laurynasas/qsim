@@ -58,7 +58,7 @@ int detect_instructions() {
     myfile << "## --------------: \n";
     unsigned hh = (unsigned)1 << 16;
     unsigned res = info[1] & ((unsigned)1 << 16);
-    myfile << info[1] <<"&" << hh << "=" << res << res != 0<<"\n";
+    myfile << info[1] <<"&" << hh << "=" << res << (res != 0) <<"\n";
     if (info[1] & ((unsigned)1 << 16) != 0) {
       myfile << "supportrs avx512: \n";
       instr = AVX512F;
