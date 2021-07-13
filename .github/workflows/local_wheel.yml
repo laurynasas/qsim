@@ -4,26 +4,6 @@ on:
   push:
 
 jobs:
-  run_test_macos_11:
-    name: Check that MacOS 10.15 package can be installed from local pip
-    runs-on: macos-11
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install reqs
-        run: |
-          sysctl -a | grep machdep
-      - name: Build local wheel
-        run: |
-          pip3 install wheel
-          brew install libomp
-          python3 setup.py sdist bdist_wheel
-      - name: Install QSim
-        run: |
-          pip3 install dist/qsimcirq-0.10.0.dev20210623-cp39-cp39-macosx_10_15_x86_64.whl
-      - name: Run tests
-        run: |
-          rm -rf qsimcirq/
-          pytest qsimcirq_tests/qsimcirq_test.py
   run_test_macos_10_15:
     name: Check that MacOS 10.15 package can be installed from local pip
     runs-on: macos-10.15
