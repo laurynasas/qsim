@@ -10,10 +10,9 @@ from distutils.version import LooseVersion
 
 
 class CMakeExtension(Extension):
-    def __init__(self, name, sourcedir="", simd="basic"):
+    def __init__(self, name, sourcedir=""):
         Extension.__init__(self, name, sources=[])
         self.sourcedir = os.path.abspath(sourcedir)
-        self.simd = simd
 
 
 class CMakeBuild(build_ext):
@@ -68,19 +67,8 @@ class CMakeBuild(build_ext):
             env.get("CXXFLAGS", ""), self.distribution.get_version()
         )
 
-        # if platform.system() != "Windows":
-        #     if ext.simd == "avx":
-        #         cmake_args += [
-        #             '-DCMAKE_CXX_FLAGS=-mavx512f -O0 -fopenmp '
-        #         ]
-        #     elif ext.simd == "sse":
-        #         cmake_args += [
-        #             '-DCMAKE_CXX_FLAGS=-msse4.1 -O0 -fopenmp'
-        #         ]
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
-        print(f"--> CMAKE ARGS {cmake_args}")
-        print(f"--> BUILD ARGS {build_args}")
         subprocess.check_call(
             ["cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env
         )
@@ -110,7 +98,7 @@ setup(
     description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    ext_modules=[CMakeExtension("qsimcirq/qsim_avx", simd="avx"), CMakeExtension("qsimcirq/qsim_sse",  simd="sse"), CMakeExtension("qsimcirq/qsim_basic"), CMakeExtension("qsimcirq/qsim_decide")],
+    ext_modules=[CMakeExtension("qsimcirq/qsim_avx512"), CMakeExtension("qsimcirq/qsim_avx2"), CMakeExtension("qsimcirq/qsim_sse"), CMakeExtension("qsimcirq/qsim_basic"), CMakeExtension("qsimcirq/qsim_decide")],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     packages=["qsimcirq"],
