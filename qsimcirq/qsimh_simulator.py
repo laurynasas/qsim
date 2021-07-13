@@ -14,13 +14,14 @@
 
 from typing import Union, Sequence
 from cirq import study, ops, protocols, circuits, value, SimulatesAmplitudes
-from qsimcirq import qsim_decide
 import importlib
 import sys
 
 
 def _load_simd_qsim():
     with open("build_log", 'a+') as f:
+        f.write("----> entry")
+        from qsimcirq import qsim_decide
         instr = qsim_decide.detect_instructions()
         if instr == 0:
             f.write("----> hsim 0")
