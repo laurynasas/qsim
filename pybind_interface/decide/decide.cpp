@@ -13,7 +13,7 @@ using namespace std;
 #else
 //  GCC Intrinsics
 #include <cpuid.h>
-void cpuid(int info[4], int infoType){
+void cpuid(unsigned info[4], int infoType){
     __cpuid_count(infoType, 0, info[0], info[1], info[2], info[3]);
 }
 
