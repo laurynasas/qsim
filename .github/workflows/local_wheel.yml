@@ -65,7 +65,9 @@ jobs:
           python -c 'from qsimcirq import qsim_decide; print(f"--> {qsim_decide.detect_instructions()}");'
           cat ./build_log ||  echo "$$$ no build log!"
           find . -name 'example.txt'
+          cat ./examplee.txt ||  echo "$$$ no example.txt!"
           cat ./example.txt ||  echo "$$$ no example.txt!"
+
           ls -la .
           cat ./build_log ||  echo "$$$ no build log!"
           cat ./build_log ||  echo "$$$ no build log!"

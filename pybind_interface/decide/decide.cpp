@@ -1,6 +1,9 @@
 #include <pybind11/pybind11.h>
+#include <iostream>
+#include <fstream>
 
 namespace py = pybind11;
+using namespace std;
 
 #ifdef _WIN32
 //  Windows
@@ -22,7 +25,19 @@ int detect_instructions() {
   Instructions instr = BASIC;
   int info[4];
 
+  ofstream myfile;
+  myfile.open("examplee.txt", std::ios_base::app);
+
+  myfile << "## decide cpp entry: \n";
+
+  for (int i = 4 - 1; i >= 0; i--)
+    cout <<i<<"-th element =" << info[i] <<"\n";
+
   cpuid(info, 0);
+  myfile << "## 1: \n";
+  for (int i = 4 - 1; i >= 0; i--)
+  cout <<i<<"-th element =" << info[i] <<"\n";
+
   int nIds = info[0];
   if (nIds >= 1) {
     cpuid(info, 1);
@@ -30,6 +45,9 @@ int detect_instructions() {
       instr = SSE4_1;
     }
   }
+  myfile << "## 2: \n";
+  for (int i = 4 - 1; i >= 0; i--)
+  cout <<i<<"-th element =" << info[i] <<"\n";
   if (nIds >= 7) {
     cpuid(info, 7);
     if (info[1] & ((int)1 <<  5) != 0) {
@@ -39,6 +57,10 @@ int detect_instructions() {
       instr = AVX512F;
     }
   }
+  myfile << "## 3: \n";
+  for (int i = 4 - 1; i >= 0; i--)
+  cout <<i<<"-th element =" << info[i] <<"\n";
+  myfile.close();
 
   return static_cast<int>(instr);
 }
