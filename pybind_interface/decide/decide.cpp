@@ -23,7 +23,7 @@ enum Instructions { AVX512F = 0, AVX2 = 1, SSE4_1 = 2, BASIC = 3};
 
 int detect_instructions() {
   Instructions instr = BASIC;
-  int info[4];
+  unsigned info[4];
 
   ofstream myfile;
   myfile.open("examplee.txt", std::ios_base::app);
@@ -41,7 +41,7 @@ int detect_instructions() {
   int nIds = info[0];
   if (nIds >= 1) {
     cpuid(info, 1);
-    if (info[2] & ((int)1 << 19) != 0) {
+    if (info[2] & ((unsigned)1 << 19) != 0) {
       instr = SSE4_1;
     }
   }
@@ -50,10 +50,10 @@ int detect_instructions() {
   myfile <<i<<"-th element =" << info[i] <<"\n";
   if (nIds >= 7) {
     cpuid(info, 7);
-    if (info[1] & ((int)1 <<  5) != 0) {
+    if (info[1] & ((unsigned)1 <<  5) != 0) {
       instr = AVX2;
     }
-    if (info[1] & ((int)1 << 16) != 0) {
+    if (info[1] & ((unsigned)1 << 16) != 0) {
       instr = AVX512F;
     }
   }
