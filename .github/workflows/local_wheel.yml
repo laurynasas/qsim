@@ -55,6 +55,7 @@ jobs:
           sudo apt-get install -y gdb
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
+          cat ./build_log ||  echo "$$$ no build log!"
       - name: Install QSim
         run: |
           pip3 install dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
