@@ -35,7 +35,6 @@ def _load_simd_qsim():
         else:
             f.write("----> hsim 3")
             qsim = importlib.import_module("qsimcirq.qsim_basic")
-        sys.modules["qsim"] = qsim
     return qsim
 
 
