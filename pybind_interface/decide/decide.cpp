@@ -1,8 +1,6 @@
-#include <pybind11/pybind11.h>
 #include <iostream>
 #include <fstream>
 
-namespace py = pybind11;
 using namespace std;
 
 #ifdef _WIN32
@@ -41,7 +39,7 @@ int detect_instructions() {
   int nIds = info[0];
   if (nIds >= 1) {
     cpuid(info, 1);
-    if (info[2] & ((unsigned)1 << 19) != 0) {
+    if (info[2] & ((unsigned)1 << 19) != (unsigned)0) {
       myfile << "supportrs sse41: \n";
       instr = SSE4_1;
     }
@@ -51,7 +49,7 @@ int detect_instructions() {
   myfile <<i<<"-th element =" << info[i] <<"\n";
   if (nIds >= 7) {
     cpuid(info, 7);
-    if (info[1] & ((unsigned)1 <<  5) != 0) {
+    if (info[1] & ((unsigned)1 <<  5) != (unsigned)0) {
       myfile << "supportrs avx2: \n";
       instr = AVX2;
     }
@@ -61,7 +59,7 @@ int detect_instructions() {
     bool bres = (res != 0);
     myfile << info[1] <<"&" << hh << "=" << res << std::boolalpha << bres <<"\n";
     myfile << typeid(res).name() << " | " << typeid(0).name() << "\n";
-    if (info[1] & ((unsigned)1 << 16) != 0) {
+    if (info[1] & ((unsigned)1 << 16) != (unsigned)0) {
       myfile << "supportrs avx512: \n";
       instr = AVX512F;
     }
@@ -76,9 +74,6 @@ int detect_instructions() {
   return static_cast<int>(instr);
 }
 
-PYBIND11_MODULE(qsim_decide, m) {
-  m.doc() = "pybind11 plugin";  // optional module docstring
+int main() {
 
-  // Methods for returning amplitudes
-  m.def("detect_instructions", &detect_instructions, "Detect SIMD");
 }
