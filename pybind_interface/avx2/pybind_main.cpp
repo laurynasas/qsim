@@ -20,8 +20,6 @@
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <iostream>
-#include <fstream>
 
 #include "../../lib/bitstring.h"
 #include "../../lib/expect.h"
@@ -65,10 +63,6 @@ struct Factory {
 
 template <typename T>
 T parseOptions(const py::dict &options, const char *key) {
-  ofstream myfile;
-  myfile.open("example.txt", std::ios_base::app);
-  myfile << "## AVX2 pybind: \n";
-  myfile.close();
   if (!options.contains(key)) {
     char msg[100];
     std::sprintf(msg, "Argument %s is not provided.\n", key);
