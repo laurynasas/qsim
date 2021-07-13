@@ -41,7 +41,7 @@ int detect_instructions() {
   int nIds = info[0];
   if (nIds >= 1) {
     cpuid(info, 1);
-    if (info[2] & ((unsigned)1 << 19) != (unsigned)0) {
+    if ((info[2] & ((unsigned)1 << 19)) != 0) {
       myfile << "supportrs sse41: \n";
       instr = SSE4_1;
     }
@@ -51,7 +51,7 @@ int detect_instructions() {
   myfile <<i<<"-th element =" << info[i] <<"\n";
   if (nIds >= 7) {
     cpuid(info, 7);
-    if (info[1] & ((unsigned)1 <<  5) != (unsigned)0) {
+    if ((info[1] & ((unsigned)1 <<  5) )!= 0) {
       myfile << "supportrs avx2: \n";
       instr = AVX2;
     }
@@ -62,7 +62,7 @@ int detect_instructions() {
     myfile << info[1] <<"&" << hh << "=" << res << std::boolalpha << bres <<"\n";
     myfile << typeid(res).name() << " | " << typeid(((unsigned)0)).name() << "\n";
     myfile << std::boolalpha << ((info[1] & ((unsigned)1 << 16)) != ((unsigned)0)) <<"\n";
-    if ((info[1] & ((unsigned)1 << 16)) != ((unsigned)0)) {
+    if ((info[1] & ((unsigned)1 << 16)) != 0) {
       myfile << "supportrs avx512: \n";
       instr = AVX512F;
     }
