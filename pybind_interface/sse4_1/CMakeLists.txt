@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(qsim)
 
-set(CMAKE_CXX_FLAGS "-msse4.1 -frecord-gcc-switches -O0 -fopenmp")
+set(CMAKE_CXX_FLAGS "-msse4.1 -O3 -fopenmp")
 
 if(APPLE)
     set(CMAKE_CXX_STANDARD 14)
