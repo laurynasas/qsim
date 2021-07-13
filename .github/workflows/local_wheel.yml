@@ -46,11 +46,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install reqs
         run: |
+          gcc -fopenmp -march=native -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           g++ test.cpp -o test && ./test
           pip3 install -r requirements.txt
       - name: Build local wheel
         run: |
-          gcc -fopenmp -march=native -dM -E - < /dev/null | egrep "SSE|AVX" | sort
           cat /proc/cpuinfo
           sudo apt-get install -y gdb
           pip3 install wheel
@@ -66,6 +66,9 @@ jobs:
           cat ./build_log ||  echo "$$$ no build log!"
           find . -name 'example.txt'
           cat ./example.txt ||  echo "$$$ no example.txt!"
+          cat ./build_log ||  echo "$$$ no build log!"
+          cat ./build_log ||  echo "$$$ no build log!"
+          cat ./build_log ||  echo "$$$ no build log!"
       - uses: actions/upload-artifact@v2
         with:
           path: ./dist/*.whl
