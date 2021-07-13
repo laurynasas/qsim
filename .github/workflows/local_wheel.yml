@@ -47,12 +47,9 @@ jobs:
       - name: Install reqs
         run: |
           gcc -fopenmp -march=native -dM -E - < /dev/null | egrep "SSE|AVX" | sort
-          g++ test.cpp -o test && ./test
-          pip3 install -r requirements.txt
       - name: Build local wheel
         run: |
           cat /proc/cpuinfo
-          sudo apt-get install -y gdb
           pip3 install wheel
           python3 setup.py sdist bdist_wheel
           cat ./build_log ||  echo "$$$ no build log!"
