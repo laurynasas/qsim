@@ -3,5 +3,6 @@ project(qsim)
 
 ADD_SUBDIRECTORY(pybind_interface/sse4_1)
 ADD_SUBDIRECTORY(pybind_interface/avx512)
+ADD_SUBDIRECTORY(pybind_interface/avx2)
 ADD_SUBDIRECTORY(pybind_interface/basic)
 ADD_SUBDIRECTORY(pybind_interface/decide)
