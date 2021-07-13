@@ -1,5 +1,12 @@
 import importlib
 from qsimcirq import qsim_decide
+from .qsim_circuit import add_op_to_opstring, add_op_to_circuit, QSimCircuit
+from .qsim_simulator import QSimSimulatorState, QSimSimulatorTrialResult, QSimSimulator
+from .qsimh_simulator import QSimhSimulator
+
+from qsimcirq._version import (
+    __version__,
+)
 
 
 def _load_simd_qsim():
@@ -20,12 +27,5 @@ def _load_simd_qsim():
             qsim = importlib.import_module("qsimcirq.qsim_basic")
     return qsim
 
+
 qsim = _load_simd_qsim()
-
-from .qsim_circuit import add_op_to_opstring, add_op_to_circuit, QSimCircuit
-from .qsim_simulator import QSimSimulatorState, QSimSimulatorTrialResult, QSimSimulator
-from .qsimh_simulator import QSimhSimulator
-
-from qsimcirq._version import (
-    __version__,
-)
