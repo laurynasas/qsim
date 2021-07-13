@@ -17,11 +17,7 @@ import warnings
 import cirq
 
 from typing import Dict, Union
-from . import _load_simd_qsim
-
-
-qsim = _load_simd_qsim()
-
+from . import qsim
 
 # List of parameter names that appear in valid Cirq protos.
 GATE_PARAMS = [
