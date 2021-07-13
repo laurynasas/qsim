@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 
+namespace py = pybind11;
 using namespace std;
 
 #ifdef _WIN32
@@ -74,6 +75,9 @@ int detect_instructions() {
   return static_cast<int>(instr);
 }
 
-int main() {
+PYBIND11_MODULE(qsim_decide, m) {
+  m.doc() = "pybind11 plugin";  // optional module docstring
 
+  // Methods for returning amplitudes
+  m.def("detect_instructions", &detect_instructions, "Detect SIMD");
 }
