@@ -66,6 +66,7 @@ jobs:
           cat ./build_log ||  echo "$$$ no build log!"
           find . -name 'example.txt'
           cat ./example.txt ||  echo "$$$ no example.txt!"
+          ls -la .
           cat ./build_log ||  echo "$$$ no build log!"
           cat ./build_log ||  echo "$$$ no build log!"
           cat ./build_log ||  echo "$$$ no build log!"
