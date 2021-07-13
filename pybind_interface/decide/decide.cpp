@@ -60,8 +60,9 @@ int detect_instructions() {
     unsigned res = info[1] & ((unsigned)1 << 16);
     bool bres = (res != 0);
     myfile << info[1] <<"&" << hh << "=" << res << std::boolalpha << bres <<"\n";
-    myfile << typeid(res).name() << " | " << typeid(0).name() << "\n";
-    if (info[1] & ((unsigned)1 << 16) != (unsigned)0) {
+    myfile << typeid(res).name() << " | " << typeid(((unsigned)0)).name() << "\n";
+    myfile << std::boolalpha << ((info[1] & ((unsigned)1 << 16)) != ((unsigned)0)) <<"\n";
+    if ((info[1] & ((unsigned)1 << 16)) != ((unsigned)0)) {
       myfile << "supportrs avx512: \n";
       instr = AVX512F;
     }
