@@ -35,7 +35,6 @@ jobs:
 #          cat ./example.txt
 #          ls -la .
 #          cat ./build_log ||  echo "$$$ no build log!"
-s
 #          ls -la /var/crash/
 #          cat /var/log/apport.log
 #          gdb -c ./core.* -ex=backtrace
