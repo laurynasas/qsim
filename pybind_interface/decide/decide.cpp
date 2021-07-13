@@ -42,6 +42,7 @@ int detect_instructions() {
   if (nIds >= 1) {
     cpuid(info, 1);
     if (info[2] & ((unsigned)1 << 19) != 0) {
+      myfile << "supportrs sse41: \n";
       instr = SSE4_1;
     }
   }
@@ -51,9 +52,11 @@ int detect_instructions() {
   if (nIds >= 7) {
     cpuid(info, 7);
     if (info[1] & ((unsigned)1 <<  5) != 0) {
+      myfile << "supportrs avx2: \n";
       instr = AVX2;
     }
     if (info[1] & ((unsigned)1 << 16) != 0) {
+      myfile << "supportrs avx512: \n";
       instr = AVX512F;
     }
   }
