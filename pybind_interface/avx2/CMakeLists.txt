@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.11)
 project(qsim)
 
-set(CMAKE_CXX_FLAGS "-mavx2 -mfma -O3 -fopenmp")
+IF (WIN32)
+    set(CMAKE_CXX_FLAGS "/arch:AVX2 /O2 /openmp")
+ELSE()
+    set(CMAKE_CXX_FLAGS "-mavx2 -mfma -O3 -fopenmp")
+ENDIF()
 
 if(APPLE)
     set(CMAKE_CXX_STANDARD 14)
