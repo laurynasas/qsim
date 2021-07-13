@@ -62,7 +62,7 @@ jobs:
       - name: Run tests
         run: |
           rm -rf qsimcirq/
-          pytest qsimcirq_tests/qsimcirq_test.py || echo "failure!"
+          python -c 'from qsimcirq import qsim_decide; print(f"--> {qsim_decide.detect_instructions()}");'
           cat ./build_log ||  echo "$$$ no build log!"
           find . -name 'example.txt'
           cat ./example.txt ||  echo "$$$ no example.txt!"
