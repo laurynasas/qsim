@@ -21,21 +21,21 @@ jobs:
           pip3 install --no-cache-dir -vvv dist/qsimcirqq-0.10.0.dev20210623-cp38-cp38-linux_x86_64.whl
       - name: Run tests
         run: |
-          sudo apt-get install -y gdb
-          ulimit -c unlimited
-          sudo sysctl -w kernel.core_uses_pid=1
-          sysctl kernel.core_pattern
-          cat /proc/sys/kernel/core_pattern
-          sudo systemctl enable apport.service
-          sudo service apport start
-          service --status-all | grep apport
+#          sudo apt-get install -y gdb
+#          ulimit -c unlimited
+#          sudo sysctl -w kernel.core_uses_pid=1
+#          sysctl kernel.core_pattern
+#          cat /proc/sys/kernel/core_pattern
+#          sudo systemctl enable apport.service
+#          sudo service apport start
+#          service --status-all | grep apport
           rm -rf qsimcirq/
           python -c 'from qsimcirq import qsim_decide; print(f"--> {qsim_decide.detect_instructions()}");'
-          gdb -ex=run -ex=backtrace --return-child-result --args python -m pytest qsimcirq_tests/qsimcirq_test.py
-          cat ./example.txt
-          ls -la .
-          cat ./build_log ||  echo "$$$ no build log!"
-
+#          gdb -ex=run -ex=backtrace --return-child-result --args python -m pytest qsimcirq_tests/qsimcirq_test.py
+#          cat ./example.txt
+#          ls -la .
+#          cat ./build_log ||  echo "$$$ no build log!"
+s
 #          ls -la /var/crash/
 #          cat /var/log/apport.log
 #          gdb -c ./core.* -ex=backtrace
