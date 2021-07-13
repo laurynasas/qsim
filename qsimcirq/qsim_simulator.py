@@ -30,32 +30,9 @@ from cirq import (
 from cirq.sim.simulator import SimulatesExpectationValues
 
 import numpy as np
-import importlib
-import sys
-
-
-def _load_simd_qsim():
-    with open("build_log", 'a+') as f:
-        f.write("----> entry")
-        from qsimcirq import qsim_decide
-        instr = qsim_decide.detect_instructions()
-        if instr == 0:
-            f.write("----> sim 0")
-            qsim = importlib.import_module("qsimcirq.qsim_avx512")
-        elif instr == 1:
-            f.write("----> sim 1")
-            qsim = importlib.import_module("qsimcirq.qsim_avx2")
-        elif instr == 2:
-            f.write("----> sim 2")
-            qsim = importlib.import_module("qsimcirq.qsim_sse")
-        else:
-            f.write("----> sim 3")
-            qsim = importlib.import_module("qsimcirq.qsim_basic")
-    return qsim
+from . import qsim
 import qsimcirq.qsim_circuit as qsimc
 
-
-qsim = _load_simd_qsim()
 
 class QSimSimulatorState(sim.StateVectorSimulatorState):
     def __init__(self, qsim_data: np.ndarray, qubit_map: Dict[ops.Qid, int]):
