@@ -40,7 +40,6 @@ namespace qsim {
 }
 
 using namespace qsim;
-using namespace std;
 
 namespace {
 
