@@ -19,27 +19,6 @@
 PYBIND11_MODULE(qsim_avx2, m) {
   EXP
 
-  // Methods for returning full state
-  m.def("qsim_simulate_fullstate",
-        static_cast<py::array_t<float>(*)(const py::dict&, uint64_t)>(
-            &qsim_simulate_fullstate),
-        "Call the qsim simulator for full state vector simulation");
-  m.def("qsim_simulate_fullstate",
-        static_cast<py::array_t<float>(*)(const py::dict&,
-                                          const py::array_t<float>&)>(
-            &qsim_simulate_fullstate),
-        "Call the qsim simulator for full state vector simulation");
-
-  m.def("qtrajectory_simulate_fullstate",
-        static_cast<py::array_t<float>(*)(const py::dict&, uint64_t)>(
-            &qtrajectory_simulate_fullstate),
-        "Call the qtrajectory simulator for full state vector simulation");
-  m.def("qtrajectory_simulate_fullstate",
-        static_cast<py::array_t<float>(*)(const py::dict&,
-                                          const py::array_t<float>&)>(
-            &qtrajectory_simulate_fullstate),
-        "Call the qtrajectory simulator for full state vector simulation");
-
   // Methods for returning samples
   m.def("qsim_sample", &qsim_sample, "Call the qsim sampler");
   m.def("qtrajectory_sample", &qtrajectory_sample,

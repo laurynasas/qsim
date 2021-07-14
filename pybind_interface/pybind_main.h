@@ -136,7 +136,26 @@ std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
 #define EXP       m.doc() = "pybind11 plugin";\
                   m.def("qsim_simulate", &qsim_simulate, "Call the qsim simulator");\
                   m.def("qtrajectory_simulate", &qtrajectory_simulate,\
-        "Call the qtrajectory simulator");
+        "Call the qtrajectory simulator");\
+         m.def("qsim_simulate_fullstate",\
+        static_cast<py::array_t<float>(*)(const py::dict&, uint64_t)>(\
+            &qsim_simulate_fullstate),\
+        "Call the qsim simulator for full state vector simulation");\
+  m.def("qsim_simulate_fullstate",\
+        static_cast<py::array_t<float>(*)(const py::dict&,\
+                                          const py::array_t<float>&)>(\
+            &qsim_simulate_fullstate),\
+        "Call the qsim simulator for full state vector simulation");\
+  m.def("qtrajectory_simulate_fullstate",\
+        static_cast<py::array_t<float>(*)(const py::dict&, uint64_t)>(\
+            &qtrajectory_simulate_fullstate),\
+        "Call the qtrajectory simulator for full state vector simulation");\
+  m.def("qtrajectory_simulate_fullstate",\
+        static_cast<py::array_t<float>(*)(const py::dict&,\
+                                          const py::array_t<float>&)>(\
+            &qtrajectory_simulate_fullstate),\
+        "Call the qtrajectory simulator for full state vector simulation");
+
 //      m.doc() = "pybind11 plugin";\
 //      m.def("qsim_simulate", &qsim_simulate, "Call the qsim simulator");\
 //      m.def("qtrajectory_simulate", &qtrajectory_simulate,\
