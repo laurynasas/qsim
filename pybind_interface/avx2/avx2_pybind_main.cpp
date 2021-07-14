@@ -33,9 +33,8 @@
 #include "../../lib/util.h"
 
 #include "../../lib/simulator_avx.h"
-
+#include "../pybind_main.cpp"
 namespace qsim {
   template <typename For>
   using Simulator = SimulatorAVX<For>;
 }
-#include "../pybind_main.cpp"
