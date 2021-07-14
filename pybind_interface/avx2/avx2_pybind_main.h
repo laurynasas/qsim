@@ -20,7 +20,7 @@ PYBIND11_MODULE(qsim_avx2, m) {
   m.doc() = "pybind11 plugin";  // optional module docstring
 
   // Methods for returning amplitudes
-  m.def("qsim_simulate", &qsim_simulate, "Call the qsim simulator");
+  EXP
   m.def("qtrajectory_simulate", &qtrajectory_simulate,
         "Call the qtrajectory simulator");
 
