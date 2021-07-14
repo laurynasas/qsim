@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "avx2_pybind_main.h"
 
 #include <complex>
 #include <sstream>
@@ -33,8 +32,11 @@
 #include "../../lib/util.h"
 
 #include "../../lib/simulator_avx.h"
-#include "../pybind_main.cpp"
+
 namespace qsim {
   template <typename For>
   using Simulator = SimulatorAVX<For>;
 }
+#include "avx2_pybind_main.h"
+
+//#include "../pybind_main.cpp"
