@@ -14,6 +14,4 @@
 
 #include "../pybind_main.h"
 
-//CREATE_QSIM_MODULE(qsim_avx2)
-
 PYBIND11_MODULE(qsim_avx2, m) { MODULE_BINDINGS }
