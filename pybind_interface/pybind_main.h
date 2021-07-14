@@ -138,6 +138,7 @@ std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
                   m.def("qtrajectory_simulate", &qtrajectory_simulate,\
         "Call the qtrajectory simulator");\
          m.def("qsim_simulate_fullstate",\
+\
         static_cast<py::array_t<float>(*)(const py::dict&, uint64_t)>(\
             &qsim_simulate_fullstate),\
         "Call the qsim simulator for full state vector simulation");\
