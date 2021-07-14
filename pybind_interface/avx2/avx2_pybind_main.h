@@ -18,8 +18,6 @@
 
 PYBIND11_MODULE(qsim_avx2, m) {
   EXP
-  m.def("qtrajectory_simulate", &qtrajectory_simulate,
-        "Call the qtrajectory simulator");
 
   // Methods for returning full state
   m.def("qsim_simulate_fullstate",

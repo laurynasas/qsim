@@ -134,7 +134,9 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
 // Hybrid simulator.
 std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
 #define EXP       m.doc() = "pybind11 plugin";\
-                  m.def("qsim_simulate", &qsim_simulate, "Call the qsim simulator");
+                  m.def("qsim_simulate", &qsim_simulate, "Call the qsim simulator");\
+                  m.def("qtrajectory_simulate", &qtrajectory_simulate,\
+        "Call the qtrajectory simulator");
 //      m.doc() = "pybind11 plugin";\
 //      m.def("qsim_simulate", &qsim_simulate, "Call the qsim simulator");\
 //      m.def("qtrajectory_simulate", &qtrajectory_simulate,\
