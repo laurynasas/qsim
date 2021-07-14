@@ -135,10 +135,10 @@ std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
 std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
 #define EXP       m.doc() = "pybind11 plugin";\
                   m.def("qsim_simulate", &qsim_simulate, "Call the qsim simulator");\
+                 \
                   m.def("qtrajectory_simulate", &qtrajectory_simulate,\
         "Call the qtrajectory simulator");\
          m.def("qsim_simulate_fullstate",\
-\
         static_cast<py::array_t<float>(*)(const py::dict&, uint64_t)>(\
             &qsim_simulate_fullstate),\
         "Call the qsim simulator for full state vector simulation");\
