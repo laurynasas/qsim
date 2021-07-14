@@ -12,128 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef __PYBIND_MAIN
-#define __PYBIND_MAIN
-
-#include <pybind11/complex.h>
-#include <pybind11/numpy.h>
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
-#include <pybind11/stl_bind.h>
-namespace py = pybind11;
-
-#include <vector>
-
-#include "../lib/circuit.h"
-#include "../lib/expect.h"
-#include "../lib/gates_cirq.h"
-#include "../lib/qtrajectory.h"
-
-// Methods for mutating noiseless circuits.
-void add_gate(const qsim::Cirq::GateKind gate_kind, const unsigned time,
-              const std::vector<unsigned>& qubits,
-              const std::map<std::string, float>& params,
-              qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
-
-void add_diagonal_gate(const unsigned time, const std::vector<unsigned>& qubits,
-                       const std::vector<float>& angles,
-                       qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
-
-void add_matrix_gate(const unsigned time, const std::vector<unsigned>& qubits,
-                     const std::vector<float>& matrix,
-                     qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
-
-void control_last_gate(const std::vector<unsigned>& qubits,
-                       const std::vector<unsigned>& values,
-                       qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
-
-// Methods for mutating noisy circuits.
-void add_gate_channel(
-    const qsim::Cirq::GateKind gate_kind,
-    const unsigned time,
-    const std::vector<unsigned>& qubits,
-    const std::map<std::string, float>& params,
-    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
-
-void add_diagonal_gate_channel(
-    const unsigned time, const std::vector<unsigned>& qubits,
-    const std::vector<float>& angles,
-    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
-
-void add_matrix_gate_channel(
-    const unsigned time, const std::vector<unsigned>& qubits,
-    const std::vector<float>& matrix,
-    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
-
-void control_last_gate_channel(
-    const std::vector<unsigned>& qubits, const std::vector<unsigned>& values,
-    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
-
-void add_channel(const unsigned time,
-                 const std::vector<unsigned>& qubits,
-                 const std::vector<std::tuple<float, std::vector<float>, bool>>&
-                     prob_matrix_unitary_triples,
-                 qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
-
-// Method for populating opstrings.
-void add_gate_to_opstring(
-    const qsim::Cirq::GateKind gate_kind,
-    const std::vector<unsigned>& qubits,
-    qsim::OpString<qsim::Cirq::GateCirq<float>>* opstring);
-
-// Methods for simulating noiseless circuits.
-std::vector<std::complex<float>> qsim_simulate(const py::dict &options);
-
-py::array_t<float> qsim_simulate_fullstate(
-      const py::dict &options, uint64_t input_state);
-py::array_t<float> qsim_simulate_fullstate(
-      const py::dict &options, const py::array_t<float> &input_vector);
-
-std::vector<unsigned> qsim_sample(const py::dict &options);
-
-// Methods for simulating noisy circuits.
-std::vector<std::complex<float>> qtrajectory_simulate(const py::dict &options);
-
-py::array_t<float> qtrajectory_simulate_fullstate(
-      const py::dict &options, uint64_t input_state);
-py::array_t<float> qtrajectory_simulate_fullstate(
-      const py::dict &options, const py::array_t<float> &input_vector);
-
-std::vector<unsigned> qtrajectory_sample(const py::dict &options);
-
-// As above, but returning expectation values instead.
-std::vector<std::complex<double>> qsim_simulate_expectation_values(
-    const py::dict &options,
-    const std::vector<std::tuple<
-                          std::vector<qsim::OpString<
-                              qsim::Cirq::GateCirq<float>>>,
-                          unsigned>>& opsums_and_qubit_counts,
-    uint64_t input_state);
-std::vector<std::complex<double>> qsim_simulate_expectation_values(
-    const py::dict &options,
-    const std::vector<std::tuple<
-                          std::vector<qsim::OpString<
-                              qsim::Cirq::GateCirq<float>>>,
-                          unsigned>>& opsums_and_qubit_counts,
-    const py::array_t<float> &input_vector);
-std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
-    const py::dict &options,
-    const std::vector<std::tuple<
-                          std::vector<qsim::OpString<
-                              qsim::Cirq::GateCirq<float>>>,
-                          unsigned>>& opsums_and_qubit_counts,
-    uint64_t input_state);
-std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
-    const py::dict &options,
-    const std::vector<std::tuple<
-                          std::vector<qsim::OpString<
-                              qsim::Cirq::GateCirq<float>>>,
-                          unsigned>>& opsums_and_qubit_counts,
-    const py::array_t<float> &input_vector);
-
-// Hybrid simulator.
-std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
-
 #define CREATE_QSIM_MODULE(qsim_name)                                      \
   PYBIND11_MODULE(qsim_name, m) {                                          \
       m.doc() = "pybind11 plugin";\
@@ -275,5 +153,127 @@ std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
       m.def("add_gate_to_opstring", &add_gate_to_opstring,\
             "Adds a gate to the given opstring.");\
   }
+
+#ifndef __PYBIND_MAIN
+#define __PYBIND_MAIN
+
+#include <pybind11/complex.h>
+#include <pybind11/numpy.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <pybind11/stl_bind.h>
+namespace py = pybind11;
+
+#include <vector>
+
+#include "../lib/circuit.h"
+#include "../lib/expect.h"
+#include "../lib/gates_cirq.h"
+#include "../lib/qtrajectory.h"
+
+// Methods for mutating noiseless circuits.
+void add_gate(const qsim::Cirq::GateKind gate_kind, const unsigned time,
+              const std::vector<unsigned>& qubits,
+              const std::map<std::string, float>& params,
+              qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
+
+void add_diagonal_gate(const unsigned time, const std::vector<unsigned>& qubits,
+                       const std::vector<float>& angles,
+                       qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
+
+void add_matrix_gate(const unsigned time, const std::vector<unsigned>& qubits,
+                     const std::vector<float>& matrix,
+                     qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
+
+void control_last_gate(const std::vector<unsigned>& qubits,
+                       const std::vector<unsigned>& values,
+                       qsim::Circuit<qsim::Cirq::GateCirq<float>>* circuit);
+
+// Methods for mutating noisy circuits.
+void add_gate_channel(
+    const qsim::Cirq::GateKind gate_kind,
+    const unsigned time,
+    const std::vector<unsigned>& qubits,
+    const std::map<std::string, float>& params,
+    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
+
+void add_diagonal_gate_channel(
+    const unsigned time, const std::vector<unsigned>& qubits,
+    const std::vector<float>& angles,
+    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
+
+void add_matrix_gate_channel(
+    const unsigned time, const std::vector<unsigned>& qubits,
+    const std::vector<float>& matrix,
+    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
+
+void control_last_gate_channel(
+    const std::vector<unsigned>& qubits, const std::vector<unsigned>& values,
+    qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
+
+void add_channel(const unsigned time,
+                 const std::vector<unsigned>& qubits,
+                 const std::vector<std::tuple<float, std::vector<float>, bool>>&
+                     prob_matrix_unitary_triples,
+                 qsim::NoisyCircuit<qsim::Cirq::GateCirq<float>>* ncircuit);
+
+// Method for populating opstrings.
+void add_gate_to_opstring(
+    const qsim::Cirq::GateKind gate_kind,
+    const std::vector<unsigned>& qubits,
+    qsim::OpString<qsim::Cirq::GateCirq<float>>* opstring);
+
+// Methods for simulating noiseless circuits.
+std::vector<std::complex<float>> qsim_simulate(const py::dict &options);
+
+py::array_t<float> qsim_simulate_fullstate(
+      const py::dict &options, uint64_t input_state);
+py::array_t<float> qsim_simulate_fullstate(
+      const py::dict &options, const py::array_t<float> &input_vector);
+
+std::vector<unsigned> qsim_sample(const py::dict &options);
+
+// Methods for simulating noisy circuits.
+std::vector<std::complex<float>> qtrajectory_simulate(const py::dict &options);
+
+py::array_t<float> qtrajectory_simulate_fullstate(
+      const py::dict &options, uint64_t input_state);
+py::array_t<float> qtrajectory_simulate_fullstate(
+      const py::dict &options, const py::array_t<float> &input_vector);
+
+std::vector<unsigned> qtrajectory_sample(const py::dict &options);
+
+// As above, but returning expectation values instead.
+std::vector<std::complex<double>> qsim_simulate_expectation_values(
+    const py::dict &options,
+    const std::vector<std::tuple<
+                          std::vector<qsim::OpString<
+                              qsim::Cirq::GateCirq<float>>>,
+                          unsigned>>& opsums_and_qubit_counts,
+    uint64_t input_state);
+std::vector<std::complex<double>> qsim_simulate_expectation_values(
+    const py::dict &options,
+    const std::vector<std::tuple<
+                          std::vector<qsim::OpString<
+                              qsim::Cirq::GateCirq<float>>>,
+                          unsigned>>& opsums_and_qubit_counts,
+    const py::array_t<float> &input_vector);
+std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
+    const py::dict &options,
+    const std::vector<std::tuple<
+                          std::vector<qsim::OpString<
+                              qsim::Cirq::GateCirq<float>>>,
+                          unsigned>>& opsums_and_qubit_counts,
+    uint64_t input_state);
+std::vector<std::complex<double>> qtrajectory_simulate_expectation_values(
+    const py::dict &options,
+    const std::vector<std::tuple<
+                          std::vector<qsim::OpString<
+                              qsim::Cirq::GateCirq<float>>>,
+                          unsigned>>& opsums_and_qubit_counts,
+    const py::array_t<float> &input_vector);
+
+// Hybrid simulator.
+std::vector<std::complex<float>> qsimh_simulate(const py::dict &options);
 
 #endif
