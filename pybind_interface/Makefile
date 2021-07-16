@@ -5,7 +5,7 @@ QSIMLIB = ../qsimcirq/qsim`python3-config --extension-suffix`
 PYBINDFLAGS_BASIC = -Wall -shared -std=c++17 -fPIC `python3 -m pybind11 --includes`
 PYBINDFLAGS_SSE = -msse4.1 -Wall -shared -std=c++17 -fPIC `python3 -m pybind11 --includes`
 PYBINDFLAGS_AVX2 = -mavx2 -mfma -Wall -shared -std=c++17 -fPIC `python3 -m pybind11 --includes`
-PYBINDFLAGS_AVX512 = -mavx512 -Wall -shared -std=c++17 -fPIC `python3 -m pybind11 --includes`
+PYBINDFLAGS_AVX512 = -mavx512f -Wall -shared -std=c++17 -fPIC `python3 -m pybind11 --includes`
 
 .PHONY: pybind
 pybind:
