@@ -23,7 +23,7 @@ pybind:
 .PHONY: clean
 clean:
 	-rm -f ./basic/*.x ./basic/*.a ./basic/*.so ./basic/*.mod $(QSIMLIB_BASIC)
-    -rm -f ./sse/*.x ./sse/*.a ./sse/*.so ./sse/*.mod $(QSIMLIB_SSE)
-    -rm -f ./avx2/*.x ./avx2/*.a ./avx2/*.so ./avx2/*.mod $(QSIMLIB_AVX2)
-    -rm -f ./avx512/*.x ./avx512/*.a ./avx512/*.so ./avx512/*.mod $(QSIMLIB_AVX512)
-    -rm -f ./decide/*.x ./decide/*.a ./decide/*.so ./decide/*.mod $(QSIMLIB_DECIDE)
+	-rm -f ./sse/*.x ./sse/*.a ./sse/*.so ./sse/*.mod $(QSIMLIB_SSE)
+	-rm -f ./avx2/*.x ./avx2/*.a ./avx2/*.so ./avx2/*.mod $(QSIMLIB_AVX2)
+	-rm -f ./avx512/*.x ./avx512/*.a ./avx512/*.so ./avx512/*.mod $(QSIMLIB_AVX512)
+	-rm -f ./decide/*.x ./decide/*.a ./decide/*.so ./decide/*.mod $(QSIMLIB_DECIDE)
