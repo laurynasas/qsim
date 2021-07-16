@@ -1,13 +1,6 @@
 name: Docker
 
-on:
-  push:
-    # Run post-submit tests when pushing to master.
-    branches:
-      - master
-
-  # Run tests for any PRs.
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   # Run tests.
