@@ -13,7 +13,7 @@ pybind:
 	$(CXX) sse/pybind_main_sse.cpp -o $(QSIMLIB) $(CXXFLAGS) $(PYBINDFLAGS_SSE)
 	$(CXX) avx2/pybind_main_avx2.cpp -o $(QSIMLIB) $(CXXFLAGS) $(PYBINDFLAGS_AVX2)
 	$(CXX) avx512/pybind_main_avx512.cpp -o $(QSIMLIB) $(CXXFLAGS) $(PYBINDFLAGS_AVX512)
-    $(CXX) decide/decide.cpp -o $(QSIMLIB) $(CXXFLAGS) $(PYBINDFLAGS_BASIC)
+	$(CXX) decide/decide.cpp -o $(QSIMLIB) $(CXXFLAGS) $(PYBINDFLAGS_BASIC)
 
 .PHONY: clean
 clean:
