@@ -4,6 +4,8 @@ from qsimcirq import qsim_decide
 
 def _load_simd_qsim():
     instr = qsim_decide.detect_instructions()
+    with open("./testing.txt", 'a+') as f:
+        f.write(f"instr -> {instr}")
     if instr == 0:
         qsim = importlib.import_module("qsimcirq.qsim_avx512")
     elif instr == 1:
