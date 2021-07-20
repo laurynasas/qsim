@@ -23,7 +23,7 @@ jobs:
         run: |
           rm -rf qsimcirq/
           pytest qsimcirq_tests/qsimcirq_test.py
-          cat ./testing.txt
+#          cat ./testing.txt
 #          ls -la .
 #          cat ./build_log ||  echo "$$$ no build log!"
 #          ls -la /var/crash/
