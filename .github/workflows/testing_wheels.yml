@@ -2,12 +2,6 @@ name: Build all wheels for testing
 
 on:
   push:
-    # Build wheels when pushing to master.
-    branches:
-      - master
-
-  # Build wheels for any PRs.
-  pull_request:
 
 jobs:
   build_wheels:
@@ -26,6 +20,11 @@ jobs:
             cibw:
               arch: universal2
               build: "cp39*"
+          - os: windows-2019
+            name: win_amd64
+            architecture: x64
+            cibw:
+              build: "cp*win_amd64"
     env:
       CIBW_BUILD: "${{ matrix.cibw.build || '*' }}"
       CIBW_ARCHS_MACOS: "${{ matrix.cibw.arch || 'auto' }}"
