@@ -14,11 +14,11 @@
 
 #ifdef _WIN32
 //  Windows
-#include <unistd.h>
+#include "getopt.h"
 
 #else
 // *nix
-#include "getopt.h"
+#include <unistd.h>
 
 #endif
 
