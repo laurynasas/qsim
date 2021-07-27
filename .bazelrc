@@ -1,6 +1,5 @@
 # Basic Windows options
 
-build:win --cxxopt /std:c++11
 build:win --copt /D_GLIBCXX_USE_CXX11_ABI=0
 
 ##### Sanitizers (choose one, or nosan for none) #####
@@ -46,7 +45,6 @@ build:sse --copt -D_GLIBCXX_USE_CXX11_ABI=0
 build:sse --copt -O3
 build:sse --copt -msse4
 
-build:sse_win --cxxopt /std:c++11
 build:sse_win --copt /D_GLIBCXX_USE_CXX11_ABI=0
 build:sse_win --copt /O2
 
