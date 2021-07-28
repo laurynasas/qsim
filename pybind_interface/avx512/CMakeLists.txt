@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
 project(qsim)
 
 
-IF (MSVC)
+IF (WIN32)
     set(CMAKE_CXX_FLAGS "/arch:AVX512 /O2 /openmp")
 ELSE()
     set(CMAKE_CXX_FLAGS "-mavx512f -O3 -fopenmp")
