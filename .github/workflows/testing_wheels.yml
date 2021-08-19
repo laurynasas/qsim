@@ -18,7 +18,7 @@ jobs:
           - os: macos-11
             name: mac-arm
             cibw:
-              arch: universal2
+              arch: x86_64 arm64
               build: "cp39*"
           - os: ubuntu-20.04
             name: manylinux2014
